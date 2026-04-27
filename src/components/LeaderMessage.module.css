@@ -1,0 +1,689 @@
+/* LeaderMessage.module.css */
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatDecor {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 0.3;
+  }
+}
+
+@keyframes lineGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.section {
+  background: linear-gradient(135deg, #f4f6fb 0%, #f9fafc 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .section {
+  background: linear-gradient(135deg, #060c1e 0%, #0a1428 100%);
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(200, 145, 42, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: floatDecor 8s ease-in-out infinite;
+}
+
+[data-theme="dark"] .section::before {
+  background: radial-gradient(circle, rgba(200, 145, 42, 0.06) 0%, transparent 70%);
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(26, 45, 124, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: floatDecor 10s ease-in-out infinite 1s;
+}
+
+[data-theme="dark"] .section::after {
+  background: radial-gradient(circle, rgba(120, 166, 255, 0.06) 0%, transparent 70%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.bgDecor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 145, 42, 0.4), transparent);
+}
+
+.quoteIcon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 40px;
+  color: #c9912a;
+  opacity: 0.4;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+[data-theme="dark"] .quoteIcon {
+  color: #9fc6ff;
+}
+
+.sliderWrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.navButton {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #c9912a;
+  background: transparent;
+  color: #c9912a;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .navButton {
+  border-color: #9fc6ff;
+  color: #9fc6ff;
+}
+
+.navButton:hover:not(:disabled) {
+  background: #c9912a;
+  color: #0b1638;
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .navButton:hover:not(:disabled) {
+  background: #9fc6ff;
+  color: #0a1428;
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.navButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.contentTransition {
+  animation: slideOut 0.2s ease-out;
+}
+
+.content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Profile Section */
+.profile {
+  opacity: 0;
+}
+
+.profileSlideIn {
+  animation: slideInLeft 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+}
+
+.imageWrapper {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.imagePlaceholder {
+  width: 240px;
+  height: 280px;
+  background: linear-gradient(135deg, #1a2d7c, #2d4a9e);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 60px rgba(26, 45, 124, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .imagePlaceholder {
+  background: linear-gradient(135deg, #081225, #132d72);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.imagePlaceholder svg {
+  width: 120px;
+  height: 120px;
+  opacity: 0.6;
+}
+
+.imageAccent {
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  right: -2px;
+  height: 3px;
+  background: linear-gradient(90deg, #c9912a, #e8b93f, transparent);
+}
+
+.profileInfo {
+  text-align: left;
+}
+
+.leaderName {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0b1638;
+  margin: 0 0 6px;
+  letter-spacing: 0.02em;
+}
+
+[data-theme="dark"] .leaderName {
+  color: #e8b93f;
+}
+
+.leaderTitle {
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8896b3;
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .leaderTitle {
+  color: #9fc6ff;
+}
+
+.profileDecor {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #c9912a, #e8b93f);
+  margin-top: 16px;
+  border-radius: 2px;
+}
+
+/* Message Section */
+.message {
+  opacity: 0;
+}
+
+.messageSlideIn {
+  animation: slideInRight 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+
+.messageText {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #0b1638;
+  margin: 0 0 24px;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="dark"] .messageText {
+  color: #f1f6ff;
+}
+
+.messageText em {
+  font-style: italic;
+  color: #c9912a;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .messageText em {
+  color: #9fc6ff;
+}
+
+.messageSubtext {
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #5a6480;
+  margin: 0 0 32px;
+}
+
+[data-theme="dark"] .messageSubtext {
+  color: rgba(241, 246, 255, 0.7);
+}
+
+.messageLine {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #c9912a, #e8b93f, transparent);
+  margin: 28px 0;
+  animation: lineGrow 1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
+}
+
+.signature {
+  margin-top: 32px;
+}
+
+.signatureName {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0b1638;
+  margin: 0 0 4px;
+  letter-spacing: 0.02em;
+}
+
+[data-theme="dark"] .signatureName {
+  color: #dce8ff;
+}
+
+.signatureTitle {
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c9912a;
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .signatureTitle {
+  color: #9fc6ff;
+}
+
+/* Slider Indicators */
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 50px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(26, 45, 124, 0.2);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .indicator {
+  background: rgba(200, 145, 42, 0.2);
+}
+
+.indicator:hover:not(:disabled) {
+  background: rgba(26, 45, 124, 0.4);
+  border-color: #c9912a;
+}
+
+[data-theme="dark"] .indicator:hover:not(:disabled) {
+  background: rgba(200, 145, 42, 0.4);
+  border-color: #9fc6ff;
+}
+
+.indicatorActive {
+  background: #c9912a;
+  border-color: #c9912a;
+  width: 32px;
+  border-radius: 6px;
+}
+
+[data-theme="dark"] .indicatorActive {
+  background: #9fc6ff;
+  border-color: #9fc6ff;
+}
+
+/* Stats Row */
+.statsRow {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 60px;
+  border-top: 1px solid rgba(26, 45, 124, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+[data-theme="dark"] .statsRow {
+  border-top-color: rgba(200, 145, 42, 0.15);
+}
+
+.statsRowVisible {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statNumber {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #c9912a;
+  margin-bottom: 4px;
+}
+
+[data-theme="dark"] .statNumber {
+  color: #e8b93f;
+}
+
+.statLabel {
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8896b3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+[data-theme="dark"] .statLabel {
+  color: rgba(200, 145, 42, 0.8);
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(26, 45, 124, 0.2);
+}
+
+[data-theme="dark"] .divider {
+  background: rgba(200, 145, 42, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 28px;
+  }
+
+  .content {
+    gap: 40px;
+  }
+
+  .messageText {
+    font-size: 20px;
+  }
+
+  .imagePlaceholder {
+    width: 200px;
+    height: 240px;
+  }
+
+  .sliderWrapper {
+    gap: 20px;
+  }
+
+  .navButton {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .profile {
+    order: 2;
+  }
+
+  .message {
+    order: 1;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .messageText {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+
+  .messageSubtext {
+    font-size: 14px;
+  }
+
+  .imagePlaceholder {
+    width: 180px;
+    height: 220px;
+    margin: 0 auto 20px;
+  }
+
+  .profileInfo {
+    text-align: center;
+  }
+
+  .profileDecor {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .statsRow {
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 40px;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+  }
+
+  .sliderWrapper {
+    gap: 12px;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .navButton svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .indicators {
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .indicatorActive {
+    width: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .quoteIcon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 30px;
+  }
+
+  .messageText {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .leaderName {
+    font-size: 20px;
+  }
+
+  .statNumber {
+    font-size: 28px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .sliderWrapper {
+    gap: 8px;
+  }
+
+  .navButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navButton svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .indicators {
+    gap: 6px;
+    margin-bottom: 30px;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .indicatorActive {
+    width: 24px;
+  }
+}
+
+
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #f0f0f0; /* Fallback color */
+}
+
+.leaderImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the headshots don't stretch */
+  object-position: center top; /* Keeps faces in frame */
+  transition: transform 0.6s ease;
+}
+
+.contentTransition .leaderImage {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+/* Ensure the wrapper is sized correctly */
+.imageWrapper {
+  position: relative;
+  width: 280px; /* Adjust based on your design */
+  height: 350px;
+  z-index: 1;
+}
+
+/* Add a slight fade for the whole content area during slide change */
+.contentTransition {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+

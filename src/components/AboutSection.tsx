@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState, type ReactElement } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./AboutSection.module.css";
 
 function useCountUp(to: number, duration: number, active: boolean): number {
@@ -56,9 +57,9 @@ export default function AboutSection(): ReactElement {
       ([entry]) => {
         if (entry.isIntersecting && !fired) {
           setFired(true);
-          setTimeout(() => setImgVisible(true),  1050);
-          setTimeout(() => setTxtVisible(true),  1300);
-          setTimeout(() => setStatsActive(true), 1650);
+          setTimeout(() => setImgVisible(true),  500);
+          setTimeout(() => setTxtVisible(true),  700);
+          setTimeout(() => setStatsActive(true), 900);
         }
       },
       { threshold: 0.15 }
@@ -67,9 +68,9 @@ export default function AboutSection(): ReactElement {
     return () => obs.disconnect();
   }, [fired]);
 
-  const raised     = useCountUp(689540, 2200, statsActive);
-  const volunteers = useCountUp(38500,  2000, statsActive);
-  const families   = useCountUp(15000,  1800, statsActive);
+  const raised     = useCountUp(689540, 1000, statsActive);
+  const volunteers = useCountUp(38500,  1000, statsActive);
+  const families   = useCountUp(15000,  1000, statsActive);
 
   return (
     <section className={styles.about} ref={sectionRef}>
@@ -93,7 +94,8 @@ export default function AboutSection(): ReactElement {
               <div className={styles.placeholder} style={{ background: "linear-gradient(145deg,#1a2d7c 0%,#2d4a9e 100%)" }}>
                 <PersonIcon />
               </div>
-              <img src="/pexels-funmiphotography-a-29108795-6895226.jpg" alt="Al Falah volunteers helping children" className={styles.cardImg}
+              <Image src="/pexels-funmiphotography-a-29108795-6895226.jpg" alt="Al Falah volunteers helping children" className={styles.cardImg}
+                fill style={{ objectFit: 'cover' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             </div>
 
@@ -101,7 +103,8 @@ export default function AboutSection(): ReactElement {
               <div className={styles.placeholder} style={{ background: "linear-gradient(145deg,#c9912a 0%,#e8b93f 100%)" }}>
                 <PersonIcon />
               </div>
-              <img src="/pexels-rdne-6646933.jpg" alt="Community support and care" className={styles.cardImg}
+              <Image src="/pexels-rdne-6646933.jpg" alt="Community support and care" className={styles.cardImg}
+                fill style={{ objectFit: 'cover' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             </div>
 
@@ -109,7 +112,8 @@ export default function AboutSection(): ReactElement {
               <div className={styles.placeholder} style={{ background: "linear-gradient(145deg,#0b1638 0%,#122060 100%)" }}>
                 <PersonIcon />
               </div>
-              <img src="/pexels-lagosfoodbank-9090750.jpg" alt="Food aid distribution for children" className={styles.cardImg}
+              <Image src="/pexels-lagosfoodbank-9090750.jpg" alt="Food aid distribution for children" className={styles.cardImg}
+                fill style={{ objectFit: 'cover' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             </div>
 
@@ -117,7 +121,8 @@ export default function AboutSection(): ReactElement {
               <div className={styles.placeholder} style={{ background: "linear-gradient(145deg,#243a96 0%,#3558c4 100%)" }}>
                 <PersonIcon />
               </div>
-              <img src="/pexels-tonywuphotography-12671875.jpg" alt="Volunteers serving the community" className={styles.cardImg}
+              <Image src="/pexels-tonywuphotography-12671875.jpg" alt="Volunteers serving the community" className={styles.cardImg}
+                fill style={{ objectFit: 'cover' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             </div>
 

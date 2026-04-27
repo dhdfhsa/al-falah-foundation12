@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, type ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Hero.module.css";
@@ -109,7 +109,7 @@ const SLIDES: Slide[] = [
   },
 ];
 
-export default function HeroSection(): JSX.Element {
+export default function HeroSection(): ReactElement {
   const [current, setCurrent] = useState<number>(0);
   const [animating, setAnimating] = useState<boolean>(false);
   const [theme, setTheme] = useState<ThemeMode>("blue");

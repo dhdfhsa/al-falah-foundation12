@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactElement } from "react";
 import styles from "./ScrollReveal.module.css";
 
 type RevealVariant = "up" | "fade" | "left" | "right";
@@ -17,7 +17,7 @@ export default function ScrollReveal({
   variant = "up",
   delayMs = 0,
   className = "",
-}: ScrollRevealProps): JSX.Element {
+}: ScrollRevealProps): ReactElement {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState<boolean>(false);
 

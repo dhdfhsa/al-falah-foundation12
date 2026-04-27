@@ -1,7 +1,7 @@
 // src/components/Navbar.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
@@ -17,7 +17,7 @@ const NAV_LINKS: { label: string; href: string }[] = [
 
 type Theme = "blue" | "dark";
 
-function PhoneIcon(): JSX.Element {
+function PhoneIcon(): ReactElement {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -26,7 +26,7 @@ function PhoneIcon(): JSX.Element {
   );
 }
 
-function MailIcon(): JSX.Element {
+function MailIcon(): ReactElement {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -36,7 +36,7 @@ function MailIcon(): JSX.Element {
   );
 }
 
-function HeartIcon(): JSX.Element {
+function HeartIcon(): ReactElement {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
       className={styles.heartIcon} aria-hidden="true">
@@ -45,7 +45,7 @@ function HeartIcon(): JSX.Element {
   );
 }
 
-function MoonIcon(): JSX.Element {
+function MoonIcon(): ReactElement {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
@@ -53,7 +53,7 @@ function MoonIcon(): JSX.Element {
   );
 }
 
-function SunIcon(): JSX.Element {
+function SunIcon(): ReactElement {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
@@ -70,7 +70,7 @@ function SunIcon(): JSX.Element {
   );
 }
 
-function UserIcon(): JSX.Element {
+function UserIcon(): ReactElement {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -80,7 +80,7 @@ function UserIcon(): JSX.Element {
   );
 }
 
-function PenIcon(): JSX.Element {
+function PenIcon(): ReactElement {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -90,7 +90,7 @@ function PenIcon(): JSX.Element {
   );
 }
 
-export default function Navbar(): JSX.Element {
+export default function Navbar(): ReactElement {
   const [scrolled,    setScrolled]    = useState<boolean>(false);
   const [menuOpen,    setMenuOpen]    = useState<boolean>(false);
   const [theme,       setTheme]       = useState<Theme>("blue");

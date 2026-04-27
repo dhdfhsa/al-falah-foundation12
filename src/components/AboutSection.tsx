@@ -1,7 +1,7 @@
 // src/components/AboutSection.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactElement } from "react";
 import Link from "next/link";
 import styles from "./AboutSection.module.css";
 
@@ -24,12 +24,12 @@ function useCountUp(to: number, duration: number, active: boolean): number {
 
 interface StatProps {
   gradient: string;
-  icon: JSX.Element;
+  icon: ReactElement;
   value: number;
   label: string;
 }
 
-function StatRow({ gradient, icon, value, label }: StatProps): JSX.Element {
+function StatRow({ gradient, icon, value, label }: StatProps): ReactElement {
   return (
     <div className={styles.stat}>
       <div className={styles.statIcon} style={{ background: gradient }}>
@@ -43,7 +43,7 @@ function StatRow({ gradient, icon, value, label }: StatProps): JSX.Element {
   );
 }
 
-export default function AboutSection(): JSX.Element {
+export default function AboutSection(): ReactElement {
   const sectionRef = useRef<HTMLElement>(null);
 
   const [fired,       setFired]       = useState<boolean>(false);
@@ -213,7 +213,7 @@ export default function AboutSection(): JSX.Element {
   );
 }
 
-function PersonIcon(): JSX.Element {
+function PersonIcon(): ReactElement {
   return (
     <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
       stroke="rgba(255,255,255,0.4)" strokeWidth="1.5"

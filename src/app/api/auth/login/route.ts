@@ -7,14 +7,13 @@ import { signToken } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   try {
-    await connectDB();
     const { email, password, isAdmin } = await req.json();
 
     if (!email || !password) {
       return NextResponse.json({ error: "Email and password required" }, { status: 400 });
     }
 
-    /* Admin login via env credentials */
+    /* Admin login via env credentials — NO DB required */
     if (isAdmin) {
       if (
         email === process.env.ADMIN_EMAIL &&
@@ -32,6 +31,7 @@ export async function POST(req: NextRequest) {
     }
 
     /* Member login */
+    await connectDB();
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) return NextResponse.json({ error: "No account found with this email" }, { status: 404 });
 

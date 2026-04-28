@@ -39,7 +39,7 @@ export default function LoginPage(): ReactElement {
     if (t === "dark") setTheme("dark");
 
     async function checkSession() {
-      const res = await fetch("/api/auth/me");
+      const res = await fetch("/api/auth/me", { credentials: "include" });
       if (res.ok) {
         const data = await res.json();
         if (data.user?.role === "admin") {
@@ -65,6 +65,7 @@ export default function LoginPage(): ReactElement {
     setLoading(true);
     const res = await fetch('/api/auth/login', {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password: pw }),
     });

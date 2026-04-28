@@ -142,7 +142,7 @@ export default function Navbar(): ReactElement {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch('/api/auth/me');
+        const res = await fetch('/api/auth/me', { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
           setSession(data.user);
@@ -163,7 +163,7 @@ export default function Navbar(): ReactElement {
   const closeMenu   = (): void => setMenuOpen(false);
 
   async function handleLogout() {
-    await fetch("/api/auth/logout", { method: "POST" });
+    await fetch("/api/auth/logout", { method: "POST", credentials: 'include' });
     localStorage.removeItem("token");
     setSession(null);
     router.push("/");

@@ -15,6 +15,16 @@ export default function AdminLoginPage() {
   const [theme,  setTheme]   = useState("blue");
 
   useEffect(() => {
+    (async () => {
+      const res = await fetch("/api/auth/me", { credentials: "include" });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.user?.role === "admin") router.replace("/admin");
+      }
+    })();
+  }, [router]);
+
+  useEffect(() => {
     setTimeout(() => setAnimate(true), 60);
     const t = document.documentElement.getAttribute("data-theme");
     if (t === "dark") setTheme("dark");
@@ -27,6 +37,7 @@ export default function AdminLoginPage() {
     setLoading(true); setErr("");
     const res = await fetch("/api/auth/login", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password: pw, isAdmin: true }),
     });

@@ -120,7 +120,7 @@ export default function AdminPage() {
   /* ── Auth check ── */
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/auth/me");
+      const res = await fetch("/api/auth/me", { credentials: "include" });
       if (!res.ok) { router.replace("/admin/login"); return; }
       const data = await res.json();
       if (data.user?.role !== "admin") { router.replace("/"); return; }

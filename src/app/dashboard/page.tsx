@@ -213,7 +213,7 @@ export default function DashboardPage() {
   /* ── Logout ── */
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
-    localStorage.removeItem("alf-session");
+    localStorage.removeItem("token");
     router.push("/");
   }
 

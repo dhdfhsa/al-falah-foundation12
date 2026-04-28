@@ -74,6 +74,7 @@ export default function LoginPage(): ReactElement {
       setLoading(false);
       return;
     }
+    if (data.token) localStorage.setItem("token", data.token);
     setLoading(false);
     router.push('/dashboard');
   }

@@ -97,7 +97,7 @@ export default function Navbar(): ReactElement {
   const [menuOpen,    setMenuOpen]    = useState<boolean>(false);
   const [theme,       setTheme]       = useState<Theme>("blue");
   const [themeReady,  setThemeReady]  = useState<boolean>(false);
-  const [session,     setSession]     = useState<{ id: string; name: string; email: string; role: string } | null>(null);
+  const [session,     setSession]     = useState<{ id: string; name: string; email: string; role: string; profilePic?: string } | null>(null);
 
   /* Restore saved theme */
   useEffect(() => {
@@ -141,22 +141,17 @@ export default function Navbar(): ReactElement {
   /* Session tracker */
   useEffect(() => {
     const checkSession = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          const res = await fetch('/api/auth/me');
-          if (res.ok) {
-            const data = await res.json();
-            setSession(data.user);
-          } else {
-            localStorage.removeItem('token');
-            setSession(null);
-          }
-        } catch (error) {
-          console.error('Error fetching session:', error);
+      try {
+        const res = await fetch('/api/auth/me');
+        if (res.ok) {
+          const data = await res.json();
+          setSession(data.user);
+        } else {
+          localStorage.removeItem('token');
           setSession(null);
         }
-      } else {
+      } catch (error) {
+        console.error('Error fetching session:', error);
         setSession(null);
       }
     };
@@ -167,7 +162,8 @@ export default function Navbar(): ReactElement {
   const toggleMenu  = (): void => setMenuOpen((p) => !p);
   const closeMenu   = (): void => setMenuOpen(false);
 
-  function handleLogout(): void {
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
     localStorage.removeItem("token");
     setSession(null);
     router.push("/");
@@ -304,7 +300,12 @@ export default function Navbar(): ReactElement {
                     onClick={() => router.push(session.role === 'admin' ? '/admin' : '/dashboard')}
                     className={`${styles.mobileGreet} ${isDark ? styles.mobileGreetDark : ""}`}
                   >
-                    👤 {session.name.split(" ")[0]}
+                    {session.profilePic ? (
+                      <img src={session.profilePic} alt="" className={styles.mobileAvatarImg} />
+                    ) : (
+                      <span>👤</span>
+                    )}
+                    {session.name.split(" ")[0]}
                   </button>
                   <button
                     onClick={handleLogout}
@@ -365,7 +366,11 @@ export default function Navbar(): ReactElement {
                   title="Go to Dashboard"
                 >
                   <div className={`${styles.userAvatar} ${isDark ? styles.userAvatarDark : ""}`}>
-                    {session.name.charAt(0).toUpperCase()}
+                    {session.profilePic ? (
+                      <img src={session.profilePic} alt="" className={styles.userAvatarImg} />
+                    ) : (
+                      session.name.charAt(0).toUpperCase()
+                    )}
                   </div>
                   <span className={`${styles.userGreet} ${isDark ? styles.userGreetDark : ""}`}>
                     {session.name.split(" ")[0]}

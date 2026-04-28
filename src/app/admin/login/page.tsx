@@ -32,6 +32,7 @@ export default function AdminLoginPage() {
     });
     const data = await res.json();
     if (!res.ok) { setErr(data.error || "Login failed"); setLoading(false); return; }
+    if (data.token) localStorage.setItem("token", data.token);
     setLoading(false);
     router.push("/admin");
   }

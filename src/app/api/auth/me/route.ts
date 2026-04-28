@@ -10,7 +10,7 @@ export async function GET() {
     if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
     if (session.role === "admin") {
-      return NextResponse.json({ user: { id: "admin", name: "Admin", email: session.email, role: "admin" } });
+      return NextResponse.json({ user: { id: "admin", name: "Admin", email: session.email, role: "admin", profilePic: "" } });
     }
 
     await connectDB();

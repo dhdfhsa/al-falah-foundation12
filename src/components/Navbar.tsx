@@ -97,7 +97,7 @@ export default function Navbar(): ReactElement {
   const [menuOpen,    setMenuOpen]    = useState<boolean>(false);
   const [theme,       setTheme]       = useState<Theme>("blue");
   const [themeReady,  setThemeReady]  = useState<boolean>(false);
-  const [session,     setSession]     = useState<{ name: string } | null>(null);
+  const [session,     setSession]     = useState<{ id: string; name: string; email: string; role: string } | null>(null);
 
   /* Restore saved theme */
   useEffect(() => {
@@ -140,14 +140,27 @@ export default function Navbar(): ReactElement {
 
   /* Session tracker */
   useEffect(() => {
-    const s = localStorage.getItem("alf_session");
-    if (s) setSession(JSON.parse(s));
-    const onStorage = () => {
-      const s2 = localStorage.getItem("alf_session");
-      setSession(s2 ? JSON.parse(s2) : null);
+    const checkSession = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const res = await fetch('/api/auth/me');
+          if (res.ok) {
+            const data = await res.json();
+            setSession(data.user);
+          } else {
+            localStorage.removeItem('token');
+            setSession(null);
+          }
+        } catch (error) {
+          console.error('Error fetching session:', error);
+          setSession(null);
+        }
+      } else {
+        setSession(null);
+      }
     };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    checkSession();
   }, []);
 
   const toggleTheme = (): void => setTheme((p) => (p === "blue" ? "dark" : "blue"));
@@ -155,7 +168,7 @@ export default function Navbar(): ReactElement {
   const closeMenu   = (): void => setMenuOpen(false);
 
   function handleLogout(): void {
-    localStorage.removeItem("alf_session");
+    localStorage.removeItem("token");
     setSession(null);
     router.push("/");
   }
@@ -287,9 +300,12 @@ export default function Navbar(): ReactElement {
             <li className={styles.mobileAuthRow}>
               {session ? (
                 <>
-                  <span className={`${styles.mobileGreet} ${isDark ? styles.mobileGreetDark : ""}`}>
+                  <button
+                    onClick={() => router.push(session.role === 'admin' ? '/admin' : '/dashboard')}
+                    className={`${styles.mobileGreet} ${isDark ? styles.mobileGreetDark : ""}`}
+                  >
                     👤 {session.name.split(" ")[0]}
-                  </span>
+                  </button>
                   <button
                     onClick={handleLogout}
                     className={`${styles.mobileLogout} ${isDark ? styles.mobileLogoutDark : ""}`}
@@ -343,14 +359,18 @@ export default function Navbar(): ReactElement {
             {session ? (
               <>
                 {/* User greeting */}
-                <div className={`${styles.userBadge} ${isDark ? styles.userBadgeDark : ""}`}>
+                <button
+                  onClick={() => router.push(session.role === 'admin' ? '/admin' : '/dashboard')}
+                  className={`${styles.userBadge} ${isDark ? styles.userBadgeDark : ""}`}
+                  title="Go to Dashboard"
+                >
                   <div className={`${styles.userAvatar} ${isDark ? styles.userAvatarDark : ""}`}>
                     {session.name.charAt(0).toUpperCase()}
                   </div>
                   <span className={`${styles.userGreet} ${isDark ? styles.userGreetDark : ""}`}>
                     {session.name.split(" ")[0]}
                   </span>
-                </div>
+                </button>
                 {/* Logout button */}
                 <button
                   onClick={handleLogout}

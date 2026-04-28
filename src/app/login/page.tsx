@@ -51,22 +51,19 @@ export default function LoginPage(): ReactElement {
     if (Object.keys(e).length > 0) return;
 
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-
-    const users: {email:string; password:string; fullName:string}[] =
-      JSON.parse(localStorage.getItem("alf_users") ?? "[]");
-    const user = users.find((u) => u.email === email && u.password === pw);
-
-    if (!user) {
-      setErrors({ general: "Invalid email or password. Please try again." });
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pw }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      setErrors({ general: data.error || 'Login failed' });
       setLoading(false);
       return;
     }
-
-    /* Save session */
-    localStorage.setItem("alf_session", JSON.stringify({ email: user.email, name: user.fullName }));
     setLoading(false);
-    router.push("/");
+    router.push('/dashboard');
   }
 
   return (

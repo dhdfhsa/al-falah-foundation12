@@ -97,7 +97,7 @@ export default function Navbar(): ReactElement {
   const [menuOpen,    setMenuOpen]    = useState<boolean>(false);
   const [theme,       setTheme]       = useState<Theme>("blue");
   const [themeReady,  setThemeReady]  = useState<boolean>(false);
-  const [session,     setSession]     = useState<{ id: string; name: string; email: string; role: string; profilePic?: string } | null>(null);
+  const [session,     setSession]     = useState<{ id: string; name?: string; email?: string; role?: string; profilePic?: string } | null>(null);
 
   /* Restore saved theme */
   useEffect(() => {
@@ -305,7 +305,7 @@ export default function Navbar(): ReactElement {
                     ) : (
                       <span>👤</span>
                     )}
-                    {session.name.split(" ")[0]}
+                    {(session.name ?? "").split(" ")[0] || "User"}
                   </button>
                   <button
                     onClick={handleLogout}
@@ -369,11 +369,11 @@ export default function Navbar(): ReactElement {
                     {session.profilePic ? (
                       <img src={session.profilePic} alt="" className={styles.userAvatarImg} />
                     ) : (
-                      session.name.charAt(0).toUpperCase()
+                      (session.name ?? "U").charAt(0).toUpperCase()
                     )}
                   </div>
                   <span className={`${styles.userGreet} ${isDark ? styles.userGreetDark : ""}`}>
-                    {session.name.split(" ")[0]}
+                    {(session.name ?? "").split(" ")[0] || "User"}
                   </span>
                 </button>
                 {/* Logout button */}

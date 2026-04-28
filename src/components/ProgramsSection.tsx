@@ -121,7 +121,7 @@ function ProgressBar({ goal, raised, active }: { goal: number; raised: number; a
   const animToGo   = useCountUp(toGo,  1900, active);
 
   return (
-    <div className={styles.progressWrap}>
+    <div className={styles.progressWrap}  >
       <div className={styles.trackRow}>
         <div className={styles.track}>
           <div className={styles.fill} style={{ width: active ? `${pct}%` : "0%" }} />
@@ -268,6 +268,7 @@ export default function ProgramsSection(): ReactElement {
     <section
       className={`${styles.section} ${isDark ? styles.sectionDark : ""}`}
       ref={sectionRef}
+      id="programs"
     >
       {/* ── Section Header ── */}
       <div className={`${styles.header} ${visible ? styles.headerIn : ""}`}>

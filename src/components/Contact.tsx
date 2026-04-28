@@ -4,7 +4,7 @@ import styles from './ContactBar.module.css';
 
 const ContactBar = () => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id='contact'>
       <div className={styles.container}>
         {/* Location */}
         <div className={styles.item}>

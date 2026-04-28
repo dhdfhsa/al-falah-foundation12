@@ -82,7 +82,7 @@ export default function AboutSection(): ReactElement {
       {/* ═══════════════════════════════════
            MAIN CONTENT
       ═══════════════════════════════════ */}
-      <div className={styles.content}>
+      <div className={styles.content} >
 
         {/* ── LEFT: Image Collage ── */}
         <div className={`${styles.imgPanel} ${imgVisible ? styles.panelIn : ""}`}>
@@ -114,7 +114,7 @@ export default function AboutSection(): ReactElement {
               </div>
               <Image src="/pexels-lagosfoodbank-9090750.jpg" alt="Food aid distribution for children" className={styles.cardImg}
                 fill style={{ objectFit: 'cover' }}
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} id="about" />
             </div>
 
             <div className={`${styles.card} ${styles.c4}`}>

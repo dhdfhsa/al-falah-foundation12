@@ -12,7 +12,8 @@ const NAV_LINKS: { label: string; href: string }[] = [
   { label: "About",    href: "#about" },
   { label: "Programs", href: "#programs" },
   { label: "Gallery",  href: "/gallery" },
-  { label: "Contact",  href: "/contact" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Contact",  href: "#contact" },
 ];
 
 type Theme = "blue" | "dark";

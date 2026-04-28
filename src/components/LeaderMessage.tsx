@@ -96,7 +96,7 @@ export default function LeaderMessage(): ReactElement {
   const leader = LEADERS[currentIndex];
 
   return (
-    <section className={`${styles.section} ${isVisible ? styles.sectionVisible : ""}`} ref={sectionRef}>
+      <section className={`${styles.section} ${isVisible ? styles.sectionVisible : ""}`} ref={sectionRef} id="testimonials">
       <div className={styles.container}>
         <div className={styles.bgDecor} />
 

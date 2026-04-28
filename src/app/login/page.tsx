@@ -37,8 +37,20 @@ export default function LoginPage(): ReactElement {
     setTimeout(() => setAnimate(true), 60);
     const t = document.documentElement.getAttribute("data-theme");
     if (t === "dark") setTheme("dark");
-    /* Redirect if already logged in */
-    if (localStorage.getItem("alf_session")) router.replace("/");
+
+    async function checkSession() {
+      const res = await fetch("/api/auth/me");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.user?.role === "admin") {
+          router.replace("/admin");
+          return;
+        }
+        router.replace("/dashboard");
+      }
+    }
+
+    checkSession();
   }, [router]);
 
   const isDark = theme === "dark";

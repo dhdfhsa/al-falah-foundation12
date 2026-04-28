@@ -135,20 +135,32 @@ export default function RegisterPage(): ReactElement {
   async function handleSubmit() {
     if (!validateS2()) return;
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1400));
 
-    /* Save to localStorage (replace with real API call) */
-    const existing = JSON.parse(localStorage.getItem("alf_users") ?? "[]");
-    if (existing.find((u: {email: string}) => u.email === s2.email)) {
-      setErrors({ email: "This email is already registered" });
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...s1,
+          email: s2.email,
+          password: s2.password,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setErrors({ email: data.error || "Registration failed" });
+        setLoading(false);
+        return;
+      }
+
       setLoading(false);
-      return;
+      setDone(true);
+      setTimeout(() => router.push("/dashboard"), 2000);
+    } catch (error) {
+      setErrors({ general: "Unable to register. Try again later." });
+      setLoading(false);
     }
-    const user = { ...s1, email: s2.email, password: s2.password, id: Date.now() };
-    localStorage.setItem("alf_users", JSON.stringify([...existing, user]));
-    setLoading(false);
-    setDone(true);
-    setTimeout(() => router.push("/login"), 2000);
   }
 
   /* ── Field helper ── */
@@ -223,6 +235,17 @@ export default function RegisterPage(): ReactElement {
           <p className={`${styles.cardSub} ${isDark ? styles.cardSubDark : ""}`}>
             Create your account and become part of the change
           </p>
+          {errors.general && (
+            <div className={`${styles.alertErr} ${isDark ? styles.alertErrDark : ""}`}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              {errors.general}
+            </div>
+          )}
         </div>
 
         {/* ── Step indicator ── */}

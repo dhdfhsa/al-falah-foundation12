@@ -1,7 +1,7 @@
 // src/app/admin/page.tsx
 "use client";
 
-import { useState, useEffect, useCallback, JSX } from "react";
+import { useState, useEffect, useCallback, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
@@ -85,7 +85,7 @@ const Icon = {
   ),
 };
 
-export default function AdminPage(): JSX.Element {
+export default function AdminPage() {
   const router = useRouter();
   const [tab,       setTab]       = useState<Tab>("dashboard");
   const [members,   setMembers]   = useState<Member[]>([]);
@@ -229,7 +229,7 @@ export default function AdminPage(): JSX.Element {
             ["members",       "Members",       <Icon.Members       key="m"/>],
             ["notifications", "Notifications", <Icon.Bell          key="b"/>],
             ["send",          "Send Notice",   <Icon.Send          key="s"/>],
-          ] as [Tab, string, JSX.Element][]).map(([t, label, icon]) => (
+          ] as [Tab, string, ReactNode][]).map(([t, label, icon]) => (
             <button
               key={t}
               className={[

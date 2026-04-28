@@ -1,11 +1,11 @@
 // src/app/admin/login/page.tsx
 "use client";
 
-import { useState, useEffect, JSX } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../../login/page.module.css";
 
-export default function AdminLoginPage(): JSX.Element {
+export default function AdminLoginPage() {
   const router   = useRouter();
   const [email,  setEmail]   = useState("");
   const [pw,     setPw]      = useState("");

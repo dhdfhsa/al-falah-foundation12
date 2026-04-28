@@ -1,7 +1,7 @@
 // src/app/dashboard/page.tsx
 "use client";
 
-import { useState, useEffect, useRef, useCallback, JSX } from "react";
+import { useState, useEffect, useRef, useCallback, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -96,7 +96,7 @@ const TYPE_CONFIG = {
   urgent:  { color: "#e05555", bg: "rgba(224,85,85,0.1)",   label: "Urgent"  },
 };
 
-export default function DashboardPage(): JSX.Element {
+export default function DashboardPage() {
   const router  = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -279,7 +279,7 @@ export default function DashboardPage(): JSX.Element {
 
         {/* Nav */}
         <nav className={styles.sideNav}>
-          {([ ["overview","Overview",<Icon.User key="u"/>], ["notifications",`Notifications`,<Icon.Bell key="b" dot={unread > 0} />], ["edit","Edit Profile",<Icon.Edit key="e"/>] ] as [Tab, string, JSX.Element][]).map(([t, label, icon]) => (
+        {([ ["overview","Overview",<Icon.User key="u"/>], ["notifications",`Notifications`,<Icon.Bell key="b" dot={unread > 0} />], ["edit","Edit Profile",<Icon.Edit key="e"/>] ] as [Tab, string, ReactNode][]).map(([t, label, icon]) => (
             <button
               key={t}
               className={[styles.navBtn, tab === t ? styles.navBtnActive : "", isDark ? styles.navBtnDark : "", tab === t && isDark ? styles.navBtnActiveDark : ""].filter(Boolean).join(" ")}

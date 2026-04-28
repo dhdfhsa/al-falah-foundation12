@@ -5,13 +5,13 @@ import { useState, useEffect, type ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-
+import { LogOut as LogOutIcon } from 'lucide-react';
+import { useRouter } from "next/navigation";
 const NAV_LINKS: { label: string; href: string }[] = [
   { label: "Home",     href: "/" },
-  { label: "About",    href: "/about" },
-  { label: "Programs", href: "/programs" },
+  { label: "About",    href: "#about" },
+  { label: "Programs", href: "#programs" },
   { label: "Gallery",  href: "/gallery" },
-  { label: "Impact",   href: "/impact" },
   { label: "Contact",  href: "/contact" },
 ];
 
@@ -91,10 +91,12 @@ function PenIcon(): ReactElement {
 }
 
 export default function Navbar(): ReactElement {
+  const router = useRouter();
   const [scrolled,    setScrolled]    = useState<boolean>(false);
   const [menuOpen,    setMenuOpen]    = useState<boolean>(false);
   const [theme,       setTheme]       = useState<Theme>("blue");
   const [themeReady,  setThemeReady]  = useState<boolean>(false);
+  const [session,     setSession]     = useState<{ name: string } | null>(null);
 
   /* Restore saved theme */
   useEffect(() => {
@@ -135,9 +137,27 @@ export default function Navbar(): ReactElement {
     };
   }, [menuOpen]);
 
+  /* Session tracker */
+  useEffect(() => {
+    const s = localStorage.getItem("alf_session");
+    if (s) setSession(JSON.parse(s));
+    const onStorage = () => {
+      const s2 = localStorage.getItem("alf_session");
+      setSession(s2 ? JSON.parse(s2) : null);
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
   const toggleTheme = (): void => setTheme((p) => (p === "blue" ? "dark" : "blue"));
   const toggleMenu  = (): void => setMenuOpen((p) => !p);
   const closeMenu   = (): void => setMenuOpen(false);
+
+  function handleLogout(): void {
+    localStorage.removeItem("alf_session");
+    setSession(null);
+    router.push("/");
+  }
 
   const isDark = theme === "dark";
 
@@ -264,20 +284,37 @@ export default function Navbar(): ReactElement {
 
             {/* Mobile-only auth */}
             <li className={styles.mobileAuthRow}>
-              <Link
-                href="/login"
-                className={`${styles.mobileLogin} ${isDark ? styles.mobileLoginDark : ""}`}
-                onClick={closeMenu}
-              >
-                <UserIcon /> Log In
-              </Link>
-              <Link
-                href="/signup"
-                className={`${styles.mobileSignup} ${isDark ? styles.mobileSignupDark : ""}`}
-                onClick={closeMenu}
-              >
-                <PenIcon /> Sign Up
-              </Link>
+              {session ? (
+                <>
+                  <span className={`${styles.mobileGreet} ${isDark ? styles.mobileGreetDark : ""}`}>
+                    👤 {session.name.split(" ")[0]}
+                  </span>
+                  <button
+                    onClick={handleLogout}
+                    className={`${styles.mobileLogout} ${isDark ? styles.mobileLogoutDark : ""}`}
+                  >
+                    <LogOutIcon /> Log Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className={`${styles.mobileLogin} ${isDark ? styles.mobileLoginDark : ""}`}
+                    onClick={closeMenu}
+                  >
+                    <UserIcon /> Log In
+                  </Link>
+                  {/* <Link
+                    href="/register"
+                    className={`${styles.mobileSignup} ${isDark ? styles.mobileSignupDark : ""}`}
+                    onClick={closeMenu}
+                  >
+                    <PenIcon /> Sign Up
+                  </Link> */}
+                </>
+              )}
+
             </li>
           </ul>
 
@@ -301,23 +338,49 @@ export default function Navbar(): ReactElement {
               </span>
             </button>
 
-            {/* Login */}
-            <Link
-              href="/login"
-              className={`${styles.loginBtn} ${isDark ? styles.loginBtnDark : ""}`}
-            >
-              <UserIcon />
-              <span>Log In</span>
-            </Link>
+            {/* ── Session-aware auth controls ── */}
+            {session ? (
+              <>
+                {/* User greeting */}
+                <div className={`${styles.userBadge} ${isDark ? styles.userBadgeDark : ""}`}>
+                  <div className={`${styles.userAvatar} ${isDark ? styles.userAvatarDark : ""}`}>
+                    {session.name.charAt(0).toUpperCase()}
+                  </div>
+                  <span className={`${styles.userGreet} ${isDark ? styles.userGreetDark : ""}`}>
+                    {session.name.split(" ")[0]}
+                  </span>
+                </div>
+                {/* Logout button */}
+                <button
+                  onClick={handleLogout}
+                  className={`${styles.logoutBtn} ${isDark ? styles.logoutBtnDark : ""}`}
+                  title="Log out"
+                >
+                  <LogOutIcon />
+                  <span>Log Out</span>
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Log In */}
+                <Link
+                  href="/login"
+                  className={`${styles.loginBtn} ${isDark ? styles.loginBtnDark : ""}`}
+                >
+                  <UserIcon />
+                  <span>Log In</span>
+                </Link>
+                                {/* Sign Up */}
+                {/* <Link
+                  href="/register"
+                  className={`${styles.signupBtn} ${isDark ? styles.signupBtnDark : ""}`}
+                >
+                  <PenIcon />
+                  <span>Sign Up</span>
+                </Link> */}
+              </>
+            )}
 
-            {/* Sign Up */}
-            <Link
-              href="/signup"
-              className={`${styles.signupBtn} ${isDark ? styles.signupBtnDark : ""}`}
-            >
-              <PenIcon />
-              <span>Sign Up</span>
-            </Link>
 
             {/* Donate */}
             <Link

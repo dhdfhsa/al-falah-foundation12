@@ -400,6 +400,61 @@
   color: #e8b93f;
 }
 
+/* ── Session Display ── */
+.sessionDisplay {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.8);
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sessionDisplayDark {
+  background: rgba(200,145,42,0.08);
+  border-color: rgba(200,145,42,0.25);
+  color: rgba(200,145,42,0.9);
+}
+
+/* ── Log Out button ── */
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  color: rgba(255,255,255,0.8);
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1.5px solid rgba(201,145,42,0.35);
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.logoutBtn:hover {
+  color: #e8b93f;
+  border-color: rgba(201,145,42,0.6);
+  background: rgba(201,145,42,0.08);
+}
+.logoutBtnDark {
+  color: rgba(200,145,42,0.85);
+  border-color: rgba(200,145,42,0.4);
+}
+.logoutBtnDark:hover {
+  color: #e8b93f;
+  border-color: rgba(200,145,42,0.7);
+  background: rgba(200,145,42,0.12);
+}
+
 /* ── Donate button ── */
 .donateBtn {
   position: relative;
@@ -722,3 +777,46 @@
     font-size: 13px;
   }
 }
+
+
+.userGreet {
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+}
+.userGreetDark { color: #e8b93f; }
+.logoutBtn {
+  padding: 8px 16px;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  background: transparent; color: rgba(255,255,255,0.8);
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+  font-size: 12px; font-weight: 600;
+  border-radius: 8px; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap;
+}
+.logoutBtn:hover { background: rgba(224,85,85,0.15); border-color: #e05555; color: #ff8080; }
+.logoutBtnDark { border-color: rgba(200,145,42,0.28); color: rgba(200,145,42,0.8); }
+.logoutBtnDark:hover { background: rgba(224,85,85,0.12); border-color: #e05555; color: #ff8080; }
+
+
+
+.userGreet {
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+}
+.userGreetDark { color: #e8b93f; }
+.logoutBtn {
+  padding: 8px 16px;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  background: transparent; color: rgba(255,255,255,0.8);
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+  font-size: 12px; font-weight: 600;
+  border-radius: 8px; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap;
+}
+.logoutBtn:hover { background: rgba(224,85,85,0.15); border-color: #e05555; color: #ff8080; }
+.logoutBtnDark { border-color: rgba(200,145,42,0.28); color: rgba(200,145,42,0.8); }
+.logoutBtnDark:hover { background: rgba(224,85,85,0.12); border-color: #e05555; color: #ff8080; }

@@ -4,6 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ProgramsSection from "@/components/ProgramsSection";
 import LeaderMessage from "@/components/LeaderMessage";
 import Footer from "@/components/Footer";
+import ContactBar from "@/components/Contact";
 export default function Home() {
   return (
     <main>
@@ -19,7 +20,7 @@ export default function Home() {
       </ScrollReveal>
 
       <LeaderMessage />
-
+<ContactBar/>
       <Footer />
 
     </main>

@@ -22,9 +22,9 @@ body {
     min-height: 100vh;
     color: #f8fafc;
     background:
-        radial-gradient(circle at 18% 16%, rgba(201, 145, 42, 0.28), transparent 20%),
-        radial-gradient(circle at 78% 18%, rgba(120, 154, 255, 0.20), transparent 22%),
-        radial-gradient(circle at 50% 78%, rgba(18, 32, 96, 0.38), transparent 28%),
-        linear-gradient(180deg, #122060 0%, #0b1638 58%, #071026 100%);
+        radial-gradient(circle at 18% 16%, rgba(201, 145, 42, 0.15), transparent 20%),
+        radial-gradient(circle at 78% 18%, rgba(120, 154, 255, 0.10), transparent 22%),
+        radial-gradient(circle at 50% 78%, rgba(18, 32, 96, 0.50), transparent 28%),
+        linear-gradient(180deg, #0a1528 0%, #071026 58%, #030712 100%);
     background-attachment: fixed;
 }

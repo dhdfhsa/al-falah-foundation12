@@ -1,0 +1,116 @@
+.wrapper {
+  /* margin-top: 100px; */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  /* If this sits on top of a footer, use: */
+  position: relative;
+  margin-bottom: -50px; 
+  z-index: 10;
+
+}
+
+.container {
+  background-color: #0b1638; /* Dark background */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 35px 50px;
+  border-radius: 100px; /* High value for the pill shape */
+  color: #ffffff;
+  transform: translateY(80px);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.iconBox {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+.value {
+  font-size: 0.9rem;
+  color: #b0b8c1; /* Soft gray for the subtext */
+  margin: 0;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: #0f171e; /* Subtle vertical line */
+  margin: 0 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+    border-radius: 30px;
+    gap: 30px;
+    padding: 40px;
+  }
+  
+  .divider {
+    display: none;
+  }
+  
+  .item {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+    gap: 20px;
+  }
+  
+  .item {
+    gap: 10px;
+  }
+  
+  .iconBox {
+    justify-content: center;
+  }
+  
+  .textContent {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+    border-radius: 20px;
+  }
+  
+  .label {
+    font-size: 0.9rem;
+  }
+  
+  .value {
+    font-size: 0.8rem;
+  }
+}

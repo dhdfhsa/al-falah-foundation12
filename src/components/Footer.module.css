@@ -1,11 +1,12 @@
 /* Footer.module.css */
 
 .footer {
-  background: #0b1638;
+  background: linear-gradient(135deg, #0b1638 0%, #1e293b 100%);
   color: #fff;
-  padding: 40px 0 20px;
+  padding: 50px 0 30px;
   margin-top: 60px;
   position: relative;
+  padding-top: 100px;
 }
 
 .footer::before {
@@ -141,15 +142,35 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .links {
+    gap: 30px;
+  }
+
+  .content {
+    gap: 30px;
+  }
+}
+
 @media (max-width: 768px) {
   .content {
     flex-direction: column;
     gap: 30px;
+    text-align: center;
+  }
+
+  .logoSection {
+    flex: none;
   }
 
   .links {
     flex-direction: column;
     gap: 30px;
+    width: 100%;
+  }
+
+  .linkGroup {
+    align-items: center;
   }
 
   .bottom {
@@ -163,8 +184,12 @@
   }
 
   .footer {
-    padding: 30px 0 20px;
+    padding: 60px 0 20px;
     margin-top: 40px;
+  }
+
+  .social {
+    justify-content: center;
   }
 }
 
@@ -173,11 +198,70 @@
     font-size: 20px;
   }
 
+  .tagline {
+    font-size: 13px;
+  }
+
+  .links {
+    gap: 25px;
+  }
+
+  .linkTitle {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .link {
+    font-size: 13px;
+  }
+
+  .copyright {
+    font-size: 12px;
+  }
+
+  .socialText {
+    font-size: 12px;
+  }
+
+  .socialLinks {
+    gap: 12px;
+  }
+
+  .socialLink {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .footer {
+    padding: 40px 0 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
   .links {
     gap: 20px;
   }
 
-  .social {
-    justify-content: center;
+  .socialLinks {
+    gap: 8px;
+  }
+
+  .socialLink {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .footer {
+    padding: 30px 0 15px;
   }
 }

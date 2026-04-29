@@ -1,7 +1,7 @@
 // src/components/Footer.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect,JSX } from "react";
 import Link from "next/link";
 import styles from "./Footer.module.css";
 

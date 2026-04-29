@@ -1,7 +1,7 @@
 // src/app/admin/page.tsx
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback , JSX} from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
@@ -56,7 +56,7 @@ const TYPE_COLORS: Record<string, { bg: string; color: string }> = {
   urgent:  { bg: "rgba(224,85,85,.12)",   color: "#e05555" },
 };
 
-export default function AdminDashboard(): ReactElement {
+export default function AdminDashboard():JSX.Element {
   const router  = useRouter();
 
   const [tab,       setTab]       = useState<Tab>("overview");

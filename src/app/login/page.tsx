@@ -1,7 +1,7 @@
 // src/app/login/page.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect,JSX } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";

@@ -3,6 +3,15 @@
 @keyframes spin   { to{transform:rotate(360deg)} }
 @keyframes pulse  { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
 
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes avatarFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 /* ── Layout ── */
 .page { display:flex;min-height:100vh;font-family:'DM Sans','Segoe UI',sans-serif;background:#f0f4fb;transition:background .4s;opacity:0; }
 .pageDark { background:#060c1e; }
@@ -36,15 +45,87 @@
 /* Avatar */
 .avatarWrap { display:flex;flex-direction:column;align-items:center;padding:28px 24px;border-bottom:1px solid rgba(255,255,255,.07); }
 .avatarOuter { position:relative;margin-bottom:14px; }
-.avatar { width:86px;height:86px;border-radius:50%;background:linear-gradient(135deg,#1a2d7c,#243a96);border:3px solid #c9912a;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3); }
-.avatarDark { border-color:rgba(200,145,42,.6); }
-.avatarImg { width:100%;height:100%;object-fit:cover; }
-.avatarInitial { font-family:'Cinzel',serif;font-size:32px;font-weight:700;color:#c9912a; }
-.camBtn { position:absolute;bottom:0;right:0;width:28px;height:28px;border-radius:50%;background:#c9912a;border:2px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0b1638;transition:background .2s; }
-.camBtnDark { border-color:#0d1830; }
-.camBtn:hover { background:#e8b93f; }
-.miniSpinner { width:12px;height:12px;border:2px solid rgba(11,22,56,.3);border-top-color:#0b1638;border-radius:50%;animation:spin .6s linear infinite; }
-.fileHidden { display:none; }
+.avatar { 
+  position: relative;
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(26,45,124,.8) 0%, rgba(11,22,56,.9) 70%, transparent 100%);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 
+    0 0 0 4px rgba(255,255,255,.08),
+    inset 0 0 0 1px rgba(255,255,255,.15),
+    0 8px 32px rgba(0,0,0,.5),
+    0 0 30px rgba(201,145,42,.3);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  animation: avatarFloat 4s ease-in-out infinite, shimmer 3s linear infinite;
+  transition: all .4s cubic-bezier(.34,1.56,.64,1);
+  transform-style: preserve-3d;
+}
+.avatar:hover {
+  transform: scale(1.1) rotateY(10deg) rotateX(5deg);
+  box-shadow: 
+    0 0 0 6px rgba(255,255,255,.15),
+    inset 0 0 0 2px rgba(255,255,255,.3),
+    0 12px 48px rgba(0,0,0,.5),
+    0 0 50px rgba(201,145,42,.5);
+}
+.avatarDark { 
+  background: radial-gradient(circle at 30% 30%, rgba(8,15,34,.85) 0%, rgba(5,12,28,.95) 70%, transparent 100%);
+  box-shadow: 
+    0 0 0 4px rgba(200,145,42,.25),
+    inset 0 0 0 1px rgba(200,145,42,.45),
+    0 8px 32px rgba(0,0,0,.7),
+    0 0 40px rgba(200,145,42,.45);
+}
+@media (prefers-reduced-motion: reduce) { 
+  .avatar, .avatarDark { animation: none; } 
+}
+.avatarImg { 
+  width: 100%; height: 100%;
+  object-fit: cover; border-radius: 50%;
+  filter: brightness(1.15) contrast(1.1);
+  transition: all .5s ease;
+  mix-blend-mode: screen;
+}
+.avatar:hover .avatarImg { 
+  transform: scale(1.2) rotate(360deg);
+  filter: brightness(1.3) sepia(.1) saturate(1.4) drop-shadow(0 0 10px rgba(255,255,255,.6));
+}
+.avatarInitial { 
+  font-family: 'Cinzel',serif; 
+  font-size: 32px; font-weight: 700; 
+  color: #fff;
+  text-shadow: 0 0 10px rgba(201,145,42,.8);
+  animation: pulse 2s infinite;
+}
+.camBtn { 
+  position: absolute; bottom: 4px; right: 4px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, #c9912a, #e8b93f);
+  border: 2px solid rgba(255,255,255,.9);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #0b1638;
+  transition: all .3s cubic-bezier(.68,-0.55,.265,1.55);
+  box-shadow: 0 4px 12px rgba(201,145,42,.4);
+}
+.camBtn:hover { 
+  transform: scale(1.15) rotate(180deg);
+  box-shadow: 0 6px 20px rgba(201,145,42,.6);
+}
+.camBtnDark { 
+  background: linear-gradient(135deg, #e8b93f, #c9912a);
+  border-color: rgba(200,145,42,.9);
+}
+.miniSpinner { 
+  width: 12px; height: 12px; 
+  border: 2px solid rgba(11,22,56,.3); 
+  border-top-color: #0b1638; 
+  border-radius: 50%; 
+  animation: spin .6s linear infinite; 
+}
+.fileHidden { display: none; }
 .avatarName { font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:#fff;text-align:center;margin-bottom:3px; }
 .avatarNameDark { color:#dce8ff; }
 .avatarRole { font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px; }

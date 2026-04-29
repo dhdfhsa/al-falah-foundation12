@@ -23,6 +23,23 @@
   to   { left: 3px;                   }
 }
 
+@keyframes avatarGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,145,42,.4); }
+  50%     { box-shadow: 0 0 20px 10px rgba(201,145,42,.25); }
+}
+@keyframes avatarFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%     { transform: translateY(-2px) rotate(1deg); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.4), inset 0 0 0 0 rgba(255,255,255,.2); }
+  70%     { box-shadow: 0 0 0 8px rgba(255,255,255,0), inset 0 0 10px 2px rgba(255,255,255,.3); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 /* ═══════════════════════════════════════
    PLACEHOLDER (prevents layout shift)
 ═══════════════════════════════════════ */
@@ -799,15 +816,48 @@
 .logoutBtnDark { border-color: rgba(200,145,42,0.28); color: rgba(200,145,42,0.8); }
 .logoutBtnDark:hover { background: rgba(224,85,85,0.12); border-color: #e05555; color: #ff8080; }
 
-.userAvatarImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.userAvatar {
+  position: relative;
+  width: 40px; height: 40px;
   border-radius: 50%;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255,255,255,.15);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  animation: avatarGlow 2.5s ease-in-out infinite;
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
 }
+.userAvatar:hover { 
+  transform: scale(1.08) rotate(5deg); 
+  box-shadow: 0 8px 25px rgba(201,145,42,.4);
+}
+.userAvatarDark {
+  backdrop-filter: blur(20px);
+  border-color: rgba(200,145,42,.6);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { 
+  .userAvatar, .userAvatarDark { animation: none; } 
+}
+
+.userAvatarImg {
+  width: 100%; height: 100%;
+  object-fit: cover; border-radius: 50%;
+  filter: brightness(1.1) contrast(1.05);
+  transition: all .4s ease;
+}
+.userAvatar:hover .userAvatarImg { 
+  transform: scale(1.15); 
+  filter: brightness(1.2) sepia(.05) saturate(1.3);
+}
+
 .mobileAvatarImg {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  object-fit: cover;
+  width: 28px; height: 28px;
+  border-radius: 50%; object-fit: cover;
+  animation: avatarFloat 3s ease-in-out infinite;
+  transition: transform .2s ease;
+}
+.mobileGreet:hover .mobileAvatarImg {
+  transform: scale(1.1);
 }

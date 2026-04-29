@@ -1,12 +1,14 @@
 // src/app/login/page.tsx
 "use client";
 
-import { useState, useEffect, type ReactElement } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
-function EyeIcon({ open }: { open: boolean }): ReactElement {
+type Theme = "blue" | "dark";
+
+function EyeIcon({ open }: { open: boolean }): JSX.Element {
   return open ? (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -23,61 +25,68 @@ function EyeIcon({ open }: { open: boolean }): ReactElement {
   );
 }
 
-export default function LoginPage(): ReactElement {
-  const router  = useRouter();
-  const [email,   setEmail]   = useState("");
-  const [pw,      setPw]      = useState("");
-  const [showPw,  setShowPw]  = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errors,  setErrors]  = useState<Record<string,string>>({});
-  const [animate, setAnimate] = useState(false);
-  const [theme,   setTheme]   = useState<"blue"|"dark">("blue");
+export default function LoginPage(): JSX.Element {
+  const router = useRouter();
+  const [email,   setEmail]   = useState<string>("");
+  const [pw,      setPw]      = useState<string>("");
+  const [showPw,  setShowPw]  = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errors,  setErrors]  = useState<Record<string, string>>({});
+  const [animate, setAnimate] = useState<boolean>(false);
+  const [theme,   setTheme]   = useState<Theme>("blue");
 
   useEffect(() => {
     setTimeout(() => setAnimate(true), 60);
-    const t = document.documentElement.getAttribute("data-theme");
-    if (t === "dark") setTheme("dark");
-
-    async function checkSession() {
-      const res = await fetch("/api/auth/me", { credentials: "include" });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.user?.role === "admin") {
-          router.replace("/admin");
-          return;
-        }
-        router.replace("/dashboard");
-      }
-    }
-
-    checkSession();
-  }, [router]);
+    const t = (localStorage.getItem("alf-theme") || "blue") as Theme;
+    setTheme(t);
+    document.documentElement.setAttribute("data-theme", t);
+  }, []);
 
   const isDark = theme === "dark";
 
-  async function handleLogin() {
-    const e: Record<string,string> = {};
+  async function handleLogin(): Promise<void> {
+    const e: Record<string, string> = {};
     if (!email.trim()) e.email = "Email is required";
     if (!pw.trim())    e.pw    = "Password is required";
     setErrors(e);
     if (Object.keys(e).length > 0) return;
 
     setLoading(true);
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password: pw }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setErrors({ general: data.error || 'Login failed' });
+
+    /* ── Check if admin credentials ── */
+    const isAdmin =
+      email.trim().toLowerCase() === process.env.NEXT_PUBLIC_ADMIN_EMAIL?.toLowerCase() ||
+      email.trim().toLowerCase() === "admin@alfalahfoundation.org";
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(),
+          password: pw,
+          isAdmin,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrors({ general: data.error || "Invalid credentials. Please try again." });
+        setLoading(false);
+        return;
+      }
+
+      /* Redirect based on role */
+      if (data.role === "admin" || data.user?.role === "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/dashboard");
+      }
+    } catch {
+      setErrors({ general: "Network error. Please try again." });
       setLoading(false);
-      return;
     }
-    if (data.token) localStorage.setItem("token", data.token);
-    setLoading(false);
-    router.push('/dashboard');
   }
 
   return (
@@ -105,6 +114,12 @@ export default function LoginPage(): ReactElement {
           </p>
         </div>
 
+        {/* Admin hint */}
+        <div className={`${styles.adminHint} ${isDark ? styles.adminHintDark : ""}`}>
+          <span className={styles.adminHintIcon}>🛡️</span>
+          <span>Admin? Use your admin email &amp; password to access the panel.</span>
+        </div>
+
         {/* General error */}
         {errors.general && (
           <div className={`${styles.alertErr} ${isDark ? styles.alertErrDark : ""}`}>
@@ -125,7 +140,9 @@ export default function LoginPage(): ReactElement {
               Email Address
             </label>
             <input
-              id="email" type="email" value={email}
+              id="email"
+              type="email"
+              value={email}
               placeholder="you@example.com"
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleLogin()}
@@ -140,9 +157,7 @@ export default function LoginPage(): ReactElement {
               <label className={`${styles.label} ${isDark ? styles.labelDark : ""}`} htmlFor="pw">
                 Password
               </label>
-              <Link href="/forgot-password" className={styles.forgot}>
-                Forgot password?
-              </Link>
+              <Link href="/forgot-password" className={styles.forgot}>Forgot password?</Link>
             </div>
             <div className={styles.pwWrap}>
               <input
@@ -154,7 +169,11 @@ export default function LoginPage(): ReactElement {
                 onKeyDown={(e) => e.key === "Enter" && handleLogin()}
                 className={`${styles.input} ${styles.inputPw} ${isDark ? styles.inputDark : ""} ${errors.pw ? styles.inputErr : ""}`}
               />
-              <button type="button" className={styles.eyeBtn} onClick={() => setShowPw((v) => !v)}>
+              <button
+                type="button"
+                className={styles.eyeBtn}
+                onClick={() => setShowPw((v) => !v)}
+              >
                 <EyeIcon open={showPw} />
               </button>
             </div>
@@ -181,12 +200,14 @@ export default function LoginPage(): ReactElement {
           </button>
         </div>
 
-        {/* Divider */}
         <div className={`${styles.divider} ${isDark ? styles.dividerDark : ""}`}>
           <span>New to Al Falah?</span>
         </div>
 
-        <Link href="/register" className={`${styles.registerLink} ${isDark ? styles.registerLinkDark : ""}`}>
+        <Link
+          href="/register"
+          className={`${styles.registerLink} ${isDark ? styles.registerLinkDark : ""}`}
+        >
           Create a Free Account
         </Link>
 

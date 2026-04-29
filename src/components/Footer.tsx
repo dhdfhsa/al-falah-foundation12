@@ -1,44 +1,187 @@
+// src/components/Footer.tsx
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Footer.module.css";
 
-export default function Footer() {
+const PROGRAMS = ["Education Fund","Food Aid","Healthcare","Orphan Care","Clean Water","Community"];
+const LINKS    = [
+  { label:"About Us",    href:"/about"    },
+  { label:"Our Team",    href:"/team"     },
+  { label:"Gallery",     href:"/gallery"  },
+  { label:"Impact",      href:"/impact"   },
+  { label:"Contact Us",  href:"/contact"  },
+  { label:"Privacy Policy", href:"/privacy" },
+];
+
+export default function Footer(): JSX.Element {
+  const [email, setEmail]     = useState("");
+  const [subOk, setSubOk]     = useState(false);
+  const [theme, setTheme]     = useState<"blue"|"dark">("blue");
+
+  useEffect(() => {
+    const sync = () => {
+      const t = document.documentElement.getAttribute("data-theme");
+      if (t === "dark" || t === "blue") setTheme(t);
+    };
+    sync();
+    const obs = new MutationObserver(sync);
+    obs.observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] });
+    return () => obs.disconnect();
+  }, []);
+
+  const isDark = theme === "dark";
+
+  const handleSub = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubOk(true);
+    setEmail("");
+    setTimeout(() => setSubOk(false), 4000);
+  };
+
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <div className={styles.logoSection}>
-            <h3 className={styles.logo}>Al Falah Foundation</h3>
-            <p className={styles.tagline}>Serving Bangladesh with compassion and dignity</p>
+    <footer className={`${styles.footer} ${isDark ? styles.footerDark : ""}`}>
+
+      {/* Animated blobs */}
+      <div className={styles.blob1} aria-hidden="true" />
+      <div className={styles.blob2} aria-hidden="true" />
+      <div className={styles.blob3} aria-hidden="true" />
+
+      {/* Top wave */}
+      <div className={styles.wave} aria-hidden="true">
+        <svg viewBox="0 0 1440 80" fill="none" preserveAspectRatio="none">
+          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"
+            fill="rgba(255,255,255,0.04)" />
+          <path d="M0,60 C360,20 720,80 1080,40 C1260,20 1380,50 1440,60 L1440,80 L0,80 Z"
+            fill="rgba(200,145,42,0.05)" />
+        </svg>
+      </div>
+
+      <div className={styles.inner}>
+
+        {/* ── Col 1: Brand ── */}
+        <div className={styles.brandCol}>
+          <div className={styles.brandRow}>
+            <div className={`${styles.logoRing} ${isDark ? styles.logoRingDark : ""}`}>
+              <svg width="38" height="38" viewBox="0 0 80 80" fill="none">
+                <ellipse cx="40" cy="32" rx="26" ry="24" fill="#1a2d7c"/>
+                <ellipse cx="40" cy="32" rx="20" ry="18" fill="#243a96"/>
+                <path d="M40 18L43 26L51 26L45 31L47 39L40 34L33 39L35 31L29 26L37 26Z" fill="#c9912a"/>
+                <rect x="36" y="50" width="8" height="18" rx="4" fill="#1a2d7c"/>
+              </svg>
+            </div>
+            <div>
+              <div className={styles.brandName}>AL FALAH</div>
+              <div className={styles.brandSub}>FOUNDATION</div>
+            </div>
           </div>
-
-          <div className={styles.links}>
-            <div className={styles.linkGroup}>
-              <h4 className={styles.linkTitle}>Programs</h4>
-              <Link href="/programs" className={styles.link}>Education</Link>
-              <Link href="/programs" className={styles.link}>Food Aid</Link>
-              <Link href="/programs" className={styles.link}>Healthcare</Link>
-            </div>
-
-            <div className={styles.linkGroup}>
-              <h4 className={styles.linkTitle}>Support</h4>
-              <Link href="/donate" className={styles.link}>Donate</Link>
-              <Link href="/volunteer" className={styles.link}>Volunteer</Link>
-              <Link href="/contact" className={styles.link}>Contact Us</Link>
-            </div>
+          <p className={styles.brandDesc}>
+            Service to Creation, Service to the Creator. We serve the most
+            vulnerable communities across Bangladesh with education, healthcare,
+            food aid and compassionate care.
+          </p>
+          {/* Social icons */}
+          <div className={styles.socials}>
+            {[
+              { label:"Facebook", d:"M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" },
+              { label:"Twitter",  d:"M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" },
+              { label:"Instagram",d:"M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M6.5 19.5h11a2 2 0 002-2v-11a2 2 0 00-2-2h-11a2 2 0 00-2 2v11a2 2 0 002 2z" },
+              { label:"YouTube",  d:"M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" },
+            ].map((s) => (
+              <a key={s.label} href="#" className={`${styles.social} ${isDark ? styles.socialDark : ""}`} aria-label={s.label}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d={s.d}/>
+                </svg>
+              </a>
+            ))}
           </div>
         </div>
 
-        <div className={styles.bottom}>
-          <p className={styles.copyright}>
-            © {new Date().getFullYear()} Al Falah Foundation. All rights reserved.
+        {/* ── Col 2: Programs ── */}
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>Our Programs</h4>
+          <ul className={styles.colList}>
+            {PROGRAMS.map((p) => (
+              <li key={p}>
+                <Link href="/programs" className={`${styles.colLink} ${isDark ? styles.colLinkDark : ""}`}>
+                  <span className={styles.colArrow}>›</span> {p}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ── Col 3: Quick links ── */}
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>Quick Links</h4>
+          <ul className={styles.colList}>
+            {LINKS.map(({ label, href }) => (
+              <li key={label}>
+                <Link href={href} className={`${styles.colLink} ${isDark ? styles.colLinkDark : ""}`}>
+                  <span className={styles.colArrow}>›</span> {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ── Col 4: Newsletter + Contact ── */}
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>Stay Connected</h4>
+          <p className={`${styles.newsDesc} ${isDark ? styles.newsDescDark : ""}`}>
+            Get updates on our programs and how your support is changing lives.
           </p>
-          <div className={styles.social}>
-            <span className={styles.socialText}>Follow us:</span>
-            <div className={styles.socialLinks}>
-              <Link href="#" className={styles.socialLink} aria-label="Facebook">📘</Link>
-              <Link href="#" className={styles.socialLink} aria-label="Twitter">🐦</Link>
-              <Link href="#" className={styles.socialLink} aria-label="Instagram">📷</Link>
-            </div>
+          <form className={styles.subForm} onSubmit={handleSub}>
+            <input
+              type="email"
+              placeholder="Your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={`${styles.subInput} ${isDark ? styles.subInputDark : ""}`}
+            />
+            <button type="submit" className={styles.subBtn}>
+              {subOk ? "✓" : "→"}
+            </button>
+          </form>
+          {subOk && (
+            <p className={styles.subOk}>✓ Subscribed! Thank you.</p>
+          )}
+
+          {/* Contact info */}
+          <div className={styles.contactList}>
+            {[
+              { icon:"📞", text:"+880 1700-000000" },
+              { icon:"✉️", text:"info@alfalahfoundation.org" },
+              { icon:"📍", text:"Dhaka, Bangladesh" },
+            ].map((c) => (
+              <div key={c.text} className={`${styles.contactItem} ${isDark ? styles.contactItemDark : ""}`}>
+                <span>{c.icon}</span>
+                <span>{c.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Bottom bar ── */}
+      <div className={`${styles.bottom} ${isDark ? styles.bottomDark : ""}`}>
+        <div className={styles.bottomInner}>
+          <p className={styles.copy}>
+            © {new Date().getFullYear()} Al Falah Foundation. All rights reserved.
+            Built with ❤️ for humanity.
+          </p>
+          <div className={styles.bottomLinks}>
+            {["Terms","Privacy","Cookies"].map((l) => (
+              <Link key={l} href={`/${l.toLowerCase()}`} className={`${styles.bottomLink} ${isDark ? styles.bottomLinkDark : ""}`}>
+                {l}
+              </Link>
+            ))}
+          </div>
+          <div className={`${styles.heartBeat} ${isDark ? styles.heartBeatDark : ""}`}>
+            ♥ Serving Humanity
           </div>
         </div>
       </div>

@@ -5,56 +5,110 @@ import { connectDB } from "@/lib/mongodb";
 import { User } from "@/models/User";
 import { signToken } from "@/lib/auth";
 
+function setCookie(res: NextResponse, token: string): void {
+  res.cookies.set("alf_token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24 * 7,
+    path: "/",
+  });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { email, password, isAdmin } = await req.json();
 
-    if (!email || !password) {
-      return NextResponse.json({ error: "Email and password required" }, { status: 400 });
+    if (!email?.trim() || !password?.trim()) {
+      return NextResponse.json(
+        { error: "Email and password are required" },
+        { status: 400 }
+      );
     }
 
-    /* Admin login via env credentials — NO DB required */
+    const normalizedEmail = email.trim().toLowerCase();
+
+    /* ── ADMIN LOGIN ── */
     if (isAdmin) {
-      if (
-        email === process.env.ADMIN_EMAIL &&
-        password === process.env.ADMIN_PASSWORD
-      ) {
-        const token = signToken({ id: "admin", email, role: "admin", name: "Admin" });
-        const res = NextResponse.json({ success: true, role: "admin", token });
-        res.cookies.set("alf_token", token, {
-          httpOnly: true, secure: process.env.NODE_ENV === "production",
-          sameSite: "lax", maxAge: 60 * 60 * 24 * 7, path: "/",
-        });
-        return res;
+      const adminEmail    = (process.env.ADMIN_EMAIL    || "").toLowerCase();
+      const adminPassword =  process.env.ADMIN_PASSWORD || "";
+
+      if (normalizedEmail !== adminEmail || password !== adminPassword) {
+        return NextResponse.json(
+          { error: "Invalid admin credentials" },
+          { status: 401 }
+        );
       }
-      return NextResponse.json({ error: "Invalid admin credentials" }, { status: 401 });
+
+      const token = signToken({
+        id:    "admin",
+        email: normalizedEmail,
+        role:  "admin",
+        name:  "Admin",
+      });
+
+      const res = NextResponse.json({ success: true, role: "admin" });
+      setCookie(res, token);
+      return res;
     }
 
-    /* Member login */
+    /* ── MEMBER LOGIN ── */
     await connectDB();
-    const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user) return NextResponse.json({ error: "No account found with this email" }, { status: 404 });
+
+    /* Also allow admin to log in without isAdmin flag */
+    const adminEmail = (process.env.ADMIN_EMAIL || "").toLowerCase();
+    if (normalizedEmail === adminEmail) {
+      const adminPassword = process.env.ADMIN_PASSWORD || "";
+      if (password !== adminPassword) {
+        return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
+      }
+      const token = signToken({ id: "admin", email: normalizedEmail, role: "admin", name: "Admin" });
+      const res = NextResponse.json({ success: true, role: "admin" });
+      setCookie(res, token);
+      return res;
+    }
+
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) {
+      return NextResponse.json(
+        { error: "No account found with this email. Please register first." },
+        { status: 404 }
+      );
+    }
+
+    if (!user.isActive) {
+      return NextResponse.json(
+        { error: "Your account has been deactivated. Please contact admin." },
+        { status: 403 }
+      );
+    }
 
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid) return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
+    if (!valid) {
+      return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
+    }
 
     const token = signToken({
-      id: user._id.toString(), email: user.email,
-      role: user.role, name: user.fullName,
+      id:    user._id.toString(),
+      email: user.email,
+      role:  user.role,
+      name:  user.fullName,
     });
 
     const res = NextResponse.json({
       success: true,
-      token,
-      user: { id: user._id, name: user.fullName, email: user.email, role: user.role },
+      role: user.role,
+      user: {
+        id:    user._id,
+        name:  user.fullName,
+        email: user.email,
+        role:  user.role,
+      },
     });
-    res.cookies.set("alf_token", token, {
-      httpOnly: true, secure: process.env.NODE_ENV === "production",
-      sameSite: "lax", maxAge: 60 * 60 * 24 * 7, path: "/",
-    });
+    setCookie(res, token);
     return res;
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    console.error("Login error:", err);
+    return NextResponse.json({ error: "Server error. Please try again." }, { status: 500 });
   }
 }

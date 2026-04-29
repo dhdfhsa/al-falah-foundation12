@@ -292,7 +292,7 @@ export default function Navbar(): ReactElement {
               </li>
             ))}
 
-            {/* Mobile-only auth */}
+{/* Mobile-only auth */}
             <li className={styles.mobileAuthRow}>
               {session ? (
                 <>

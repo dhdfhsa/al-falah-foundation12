@@ -1,0 +1,96 @@
+.main {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--site-navy) 0%, #071026 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero {
+  max-width: 600px;
+  z-index: 2;
+  position: relative;
+}
+
+.title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  background: linear-gradient(135deg, #c9912a 0%, #f4c430 50%, #c9912a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 12px rgba(201, 145, 42, 0.3));
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 4px 12px rgba(201, 145, 42, 0.3)); }
+  to { filter: drop-shadow(0 8px 24px rgba(201, 145, 42, 0.6)); }
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #c9912a 0%, #f4c430 100%);
+  color: #0a1528;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 8px 32px rgba(201, 145, 42, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(201, 145, 42, 0.6);
+}
+
+.decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.decorItem {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(201, 145, 42, 0.6);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.decorItem:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.decorItem:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+.decorItem:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+  50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .main { padding: 1.5rem 1rem; }
+  .title { margin-bottom: 0.75rem; }
+}
+

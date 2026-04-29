@@ -1,0 +1,122 @@
+.main {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--site-navy) 0%, #0a1528 50%, var(--site-bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 2;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.spinner div {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #c9912a, #f4c430);
+  border-radius: 50%;
+  animation: spin 1.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.spinner div:nth-child(1) { animation-delay: -0.3s; }
+.spinner div:nth-child(2) { animation-delay: -0.15s; left: 28px; }
+.spinner div:nth-child(3) { animation-delay: 0s; top: 28px; }
+.spinner div:nth-child(4) { animation-delay: 0.15s; }
+
+@keyframes spin {
+  0% { transform: rotate(0deg) translateX(30px) scale(1); opacity: 1; }
+  50% { transform: rotate(180deg) translateX(30px) scale(0.6); opacity: 0.7; }
+  100% { transform: rotate(360deg) translateX(30px) scale(1); opacity: 1; }
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  background: linear-gradient(135deg, #c9912a 0%, #f4c430 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  padding: 4rem 2rem;
+  width: 100%;
+}
+
+.skeletonCard {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 200px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.02); }
+}
+
+.skeletonLine {
+  height: 20px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  border-radius: 12px;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 1rem;
+}
+
+.skeletonLine2 {
+  height: 16px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  border-radius: 12px;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+
+.skeletonLine3 {
+  height: 16px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  border-radius: 12px;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 1rem;
+  width: 60%;
+}
+
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+  background-size: 200% 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+

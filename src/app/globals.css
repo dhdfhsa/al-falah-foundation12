@@ -4,6 +4,8 @@
     --site-navy-soft: #dfe7fb;
     --site-gold: #c9912a;
     --site-bg: #f7f9fd;
+    --font-sans: "Segoe UI", Arial, Helvetica, sans-serif;
+    --font-serif: Georgia, "Times New Roman", serif;
 }
 
 * {
@@ -21,10 +23,11 @@ body {
 body {
     min-height: 100vh;
     color: #f8fafc;
+    font-family: var(--font-sans);
     background:
         radial-gradient(circle at 18% 16%, rgba(201, 145, 42, 0.15), transparent 20%),
         radial-gradient(circle at 78% 18%, rgba(120, 154, 255, 0.10), transparent 22%),
         radial-gradient(circle at 50% 78%, rgba(18, 32, 96, 0.50), transparent 28%),
         linear-gradient(180deg, #0a1528 0%, #071026 58%, #030712 100%);
-    background-attachment: fixed;
+    background-attachment: scroll;
 }

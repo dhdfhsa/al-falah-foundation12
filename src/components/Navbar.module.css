@@ -557,15 +557,52 @@
    MOBILE MENU
 ═══════════════════════════════════════ */
 @media (max-width: 1100px) {
+  .topBarInner {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .topBarLeft {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .navInner {
+    padding: 0 20px;
+    gap: 6px;
+  }
+
+  .navLinks {
+    gap: 0;
+  }
+
+  .navLink {
+    padding: 8px 10px;
+    font-size: 10.8px;
+  }
+
+  .navRight {
+    gap: 6px;
+  }
+
   .toggleLabel { display: none; }
   .loginBtn span,
   .signupBtn span { display: none; }
   .loginBtn,
   .signupBtn { padding: 8px 10px; }
+
+  .userGreet { display: none; }
+  .userBadge {
+    padding-right: 6px;
+  }
 }
 
 @media (max-width: 900px) {
   .hamburger { display: flex; }
+  .userBadge,
+  .logoutBtn {
+    display: none;
+  }
 
   .menuBackdrop {
     display: block;
@@ -803,6 +840,31 @@
   white-space: nowrap;
 }
 .userGreetDark { color: #e8b93f; }
+
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(232,185,63,0.25);
+  background: rgba(232,185,63,0.10);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.userBadge:hover {
+  transform: translateY(-1px);
+  background: rgba(232,185,63,0.16);
+  border-color: rgba(232,185,63,0.5);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.userBadgeDark {
+  background: rgba(232,185,63,0.08);
+  border-color: rgba(232,185,63,0.26);
+}
+
 .logoutBtn {
   padding: 8px 16px;
   border: 1.5px solid rgba(255,255,255,0.22);
@@ -820,21 +882,26 @@
   position: relative;
   width: 40px; height: 40px;
   border-radius: 50%;
+  background: linear-gradient(135deg, #e8b93f 0%, #c9912a 100%);
+  color: #0b1638;
+  font-family: 'Cinzel','Times New Roman',serif;
+  font-size: 16px;
+  font-weight: 700;
   backdrop-filter: blur(20px);
-  border: 2px solid rgba(255,255,255,.15);
+  border: 2px solid rgba(11,22,56,.08);
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
   animation: avatarGlow 2.5s ease-in-out infinite;
   transition: all .3s cubic-bezier(.34,1.56,.64,1);
-  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+  box-shadow: 0 4px 16px rgba(11,22,56,.28);
 }
 .userAvatar:hover { 
   transform: scale(1.08) rotate(5deg); 
-  box-shadow: 0 8px 25px rgba(201,145,42,.4);
+  box-shadow: 0 8px 25px rgba(232,185,63,.38);
 }
 .userAvatarDark {
-  backdrop-filter: blur(20px);
-  border-color: rgba(200,145,42,.6);
+  background: linear-gradient(135deg, #e8b93f 0%, #d6a326 100%);
+  border-color: rgba(11,22,56,.10);
   animation: pulseGlow 2s ease-in-out infinite;
 }
 @media (prefers-reduced-motion: reduce) { 
@@ -860,4 +927,56 @@
 }
 .mobileGreet:hover .mobileAvatarImg {
   transform: scale(1.1);
+}
+
+.mobileGreet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.mobileGreet:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.28);
+  transform: translateY(-1px);
+}
+.mobileGreetDark {
+  border-color: rgba(232,185,63,0.24);
+  background: rgba(232,185,63,0.08);
+  color: #e8b93f;
+}
+.mobileLogout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(224,85,85,0.22);
+  background: rgba(224,85,85,0.08);
+  color: rgba(255,255,255,0.85);
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.mobileLogout:hover {
+  background: rgba(224,85,85,0.14);
+  border-color: rgba(224,85,85,0.34);
+  transform: translateY(-1px);
+}
+.mobileLogoutDark {
+  border-color: rgba(232,185,63,0.20);
+  background: rgba(232,185,63,0.07);
+  color: rgba(232,185,63,0.95);
 }

@@ -1,9 +1,6 @@
 // src/lib/mongodb.ts
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-if (!MONGODB_URI) throw new Error("Please define MONGODB_URI in .env.local");
-
 interface MongoCache {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -19,6 +16,11 @@ if (!global.mongooseCache) {
 }
 
 export async function connectDB(): Promise<typeof mongoose> {
+  const MONGODB_URI = process.env.MONGODB_URI;
+  if (!MONGODB_URI) {
+    throw new Error("Please define MONGODB_URI in .env.local");
+  }
+
   if (global.mongooseCache.conn) return global.mongooseCache.conn;
   if (!global.mongooseCache.promise) {
     global.mongooseCache.promise = mongoose.connect(MONGODB_URI, {

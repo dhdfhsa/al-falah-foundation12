@@ -1,7 +1,7 @@
 // src/components/Navbar.tsx
 "use client";
 
-import { useState, useEffect, type ReactElement } from "react";
+import { useState, useEffect, useRef, type ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
@@ -95,14 +95,15 @@ export default function Navbar(): ReactElement {
   const router = useRouter();
   const [scrolled,    setScrolled]    = useState<boolean>(false);
   const [menuOpen,    setMenuOpen]    = useState<boolean>(false);
-  const [theme,       setTheme]       = useState<Theme>("blue");
+  const [theme,       setTheme]       = useState<Theme>("dark");
   const [themeReady,  setThemeReady]  = useState<boolean>(false);
   const [session,     setSession]     = useState<{ id: string; name?: string; email?: string; role?: string; profilePic?: string } | null>(null);
+  const scrollRaf = useRef<number | null>(null);
 
   /* Restore saved theme */
   useEffect(() => {
     const saved = localStorage.getItem("alf-theme") as Theme | null;
-    const nextTheme = saved === "dark" || saved === "blue" ? saved : "blue";
+    const nextTheme = saved === "dark" || saved === "blue" ? saved : "dark";
     const frame = requestAnimationFrame(() => {
       setTheme(nextTheme);
       setThemeReady(true);
@@ -119,9 +120,26 @@ export default function Navbar(): ReactElement {
 
   /* Scroll listener */
   useEffect(() => {
-    const onScroll = (): void => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const updateScrolled = (): void => {
+      scrollRaf.current = null;
+      const nextScrolled = window.scrollY > 8;
+      setScrolled((prev) => (prev === nextScrolled ? prev : nextScrolled));
+    };
+
+    const onScroll = (): void => {
+      if (scrollRaf.current !== null) return;
+      scrollRaf.current = window.requestAnimationFrame(updateScrolled);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (scrollRaf.current !== null) {
+        window.cancelAnimationFrame(scrollRaf.current);
+        scrollRaf.current = null;
+      }
+    };
   }, []);
 
   /* Prevent background scroll while the mobile menu is open */
@@ -170,8 +188,6 @@ export default function Navbar(): ReactElement {
   }
 
   const isDark = theme === "dark";
-
-  if (!themeReady) return <div className={styles.placeholder} />;
 
   return (
     <>

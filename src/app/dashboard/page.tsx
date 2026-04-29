@@ -33,6 +33,12 @@ interface Notif {
 type Tab = "overview" | "notifications" | "edit";
 type Theme = "blue" | "dark";
 
+const DASHBOARD_TABS: [Tab, string][] = [
+  ["overview", "Overview"],
+  ["notifications", "Notifications"],
+  ["edit", "Edit Profile"],
+];
+
 /* ── Icon set ── */
 const Icon = {
   User: () => (
@@ -332,6 +338,26 @@ export default function DashboardPage() {
               {user.fullName.charAt(0).toUpperCase()}
             </div>
           </div>
+        </div>
+
+        <div className={styles.mobileTabs} role="tablist" aria-label="Dashboard sections">
+          {DASHBOARD_TABS.map(([key, label]) => (
+            <button
+              key={key}
+              type="button"
+              role="tab"
+              aria-selected={tab === key}
+              className={[
+                styles.mobileTabBtn,
+                tab === key ? styles.mobileTabBtnActive : "",
+                isDark ? styles.mobileTabBtnDark : "",
+                tab === key && isDark ? styles.mobileTabBtnActiveDark : "",
+              ].filter(Boolean).join(" ")}
+              onClick={() => setTab(key)}
+            >
+              {label}
+            </button>
+          ))}
         </div>
 
         {/* ── OVERVIEW TAB ── */}

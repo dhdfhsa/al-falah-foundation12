@@ -44,24 +44,6 @@
   position: relative;
 }
 
-.hero::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 14px;
-  width: min(280px, 68vw);
-  transform: translateX(-50%);
-  border-bottom: 3px dotted rgba(201, 145, 42, 0.7);
-  opacity: 0.85;
-  pointer-events: none;
-  z-index: 6;
-}
-
-[data-theme="dark"] .hero::after {
-  border-bottom-color: rgba(232, 185, 63, 0.68);
-  opacity: 0.72;
-}
-
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    LEFT â€” Tree Panel
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */

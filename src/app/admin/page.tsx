@@ -8,6 +8,13 @@ import styles from "./page.module.css";
 type Theme  = "blue" | "dark";
 type Tab    = "overview" | "members" | "send" | "notifications";
 
+const ADMIN_TABS: [Tab, string][] = [
+  ["overview", "Overview"],
+  ["members", "Members"],
+  ["notifications", "Notifications"],
+  ["send", "Send Notice"],
+];
+
 interface Member {
   _id: string;
   fullName: string;
@@ -291,6 +298,26 @@ export default function AdminDashboard(): React.ReactNode {
             🛡️ Admin
           </div>
         </header>
+
+        <div className={styles.mobileTabs} role="tablist" aria-label="Admin sections">
+          {ADMIN_TABS.map(([key, label]) => (
+            <button
+              key={key}
+              type="button"
+              role="tab"
+              aria-selected={tab === key}
+              className={[
+                styles.mobileTabBtn,
+                tab === key ? styles.mobileTabBtnActive : "",
+                isDark ? styles.mobileTabBtnDark : "",
+                tab === key && isDark ? styles.mobileTabBtnActiveDark : "",
+              ].filter(Boolean).join(" ")}
+              onClick={() => setTab(key)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
 
         <div className={styles.body}>
 

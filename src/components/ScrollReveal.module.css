@@ -1,27 +1,23 @@
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  filter: blur(6px);
+  transform: translateY(20px);
   transition:
-    opacity 0.75s ease,
-    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.75s ease;
-  will-change: opacity, transform, filter;
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .visible {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 .up {
-  transform: translateY(28px);
+  transform: translateY(20px);
 }
 
 .fade {
   transform: none;
-  filter: blur(0);
 }
 
 .left {
@@ -48,7 +44,6 @@
   .right {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
   }
 }

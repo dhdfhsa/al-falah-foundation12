@@ -15,7 +15,7 @@ const LINKS    = [
   { label:"Privacy Policy", href:"/privacy" },
 ];
 
-export default function Footer(): JSX.Element {
+export default function Footer(): React.ReactNode {
   const [email, setEmail]     = useState("");
   const [subOk, setSubOk]     = useState(false);
   const [theme, setTheme]     = useState<"blue"|"dark">("blue");

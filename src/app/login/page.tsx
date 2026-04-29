@@ -25,7 +25,7 @@ function EyeIcon({ open }: { open: boolean }): JSX.Element {
   );
 }
 
-export default function LoginPage(): JSX.Element {
+export default function LoginPage(): React.ReactNode {
   const router = useRouter();
   const [email,   setEmail]   = useState<string>("");
   const [pw,      setPw]      = useState<string>("");

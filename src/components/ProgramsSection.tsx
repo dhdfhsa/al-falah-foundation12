@@ -22,43 +22,42 @@ interface Program {
 const PROGRAMS: Program[] = [
   {
     id: 1,
-    tag: "#Education",
+    tag: "#FoodAid",
     tagColor: "#1a2d7c",
-    image: "/pexels-funmiphotography-a-29108795-6895226.jpg",
-    title: "Gift an Education — Change a Life Forever",
-    description:
-      "We fund schools, scholarships and learning centers for underprivileged children across Bangladesh so every child gets the future they deserve.",
-    goal: 120000,
-    raised: 96000,
-    category: "Education",
+    image: "/omer-faruk-yildiz-IHFSvlzf9fI-unsplash.jpg",
+    title: "Help our Palestine Brothers",
+    description:"The people of palestine is in big problem. They are our muslime brothers.The **rail is killing children and others.Donate now.",
+   goal: 100000,
+    raised: 40000,
+    category: "FoodAid",
   },
   {
     id: 2,
     tag: "#FoodAid",
     tagColor: "#c9912a",
-    image: "/pexels-rdne-6646933.jpg",
-    title: "No Family Should Go to Bed Hungry",
+    image: "/iftaer.jpg",
+    title: "Give Ifter in Ramadan",
     description:
-      "Monthly food packages, hot iftar meals and emergency rations delivered to thousands of struggling families every single month.",
-    goal: 80000,
-    raised: 56000,
-    category: "Food Aid",
+"Support our mission to provide Ifter. Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus perferendis nobis qui quam accusantium.",
+    goal:15000 ,
+    raised: 10000,
+    category: "FoodAid",
   },
   {
     id: 3,
-    tag: "#Healthcare",
+    tag: "#FoodAid",
     tagColor: "#0b1638",
-    image: "/pexels-lagosfoodbank-9090750.jpg",
-    title: "Free Healthcare Reaching Every Doorstep",
+    image: "/Gemini_Generated_Image_8yq8178yq8178yq8.png",
+    title: "Donate Blanket in winner",
     description:
-      "Mobile medical camps, free medicines and specialist consultations for communities where quality care was once out of reach.",
-    goal: 95000,
-    raised: 57000,
-    category: "Healthcare",
+      "Winter is harsh for the homeless. Your blanket donation can provide warmth and comfort to those in need, making a life-saving difference this season.",
+    goal: 10000,
+    raised: 1000,
+    category: "FoodAid",
   },
   {
     id: 4,
-    tag: "#Orphans",
+    tag: "#FoodAid",
     tagColor: "#1a2d7c",
     image: "/pexels-tonywuphotography-12671875.jpg",
     title: "Every Orphaned Child Deserves a Home",
@@ -94,7 +93,7 @@ const PROGRAMS: Program[] = [
   },
 ];
 
-const CATEGORIES = ["All", "Education", "Food Aid", "Healthcare", "Orphan Care", "Clean Water", "Community"];
+const CATEGORIES = ["All", "Education", "FoodAid", "Healthcare", "Orphan Care", "Clean Water", "Community"];
 
 function useCountUp(to: number, duration: number, active: boolean): number {
   const [val, setVal] = useState(0);

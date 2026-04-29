@@ -1,7 +1,7 @@
 // src/components/Footer.tsx
 "use client";
 
-import { useState, useEffect,JSX } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Footer.module.css";
 
@@ -85,12 +85,18 @@ export default function Footer(): React.ReactNode {
           {/* Social icons */}
           <div className={styles.socials}>
             {[
-              { label:"Facebook", d:"M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" },
-              { label:"Twitter",  d:"M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" },
-              { label:"Instagram",d:"M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M6.5 19.5h11a2 2 0 002-2v-11a2 2 0 00-2-2h-11a2 2 0 00-2 2v11a2 2 0 002 2z" },
-              { label:"YouTube",  d:"M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" },
+              {
+                label:"Facebook",
+                href:"https://www.facebook.com/profile.php?id=100091759538437",
+                d:"M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z",
+              },
+              {
+                label:"Instagram",
+                href:"https://www.instagram.com/its_falahh?igsh=MTc1a2FmczRuemhwYQ==",
+                d:"M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M6.5 19.5h11a2 2 0 002-2v-11a2 2 0 00-2-2h-11a2 2 0 00-2 2v11a2 2 0 002 2z",
+              },
             ].map((s) => (
-              <a key={s.label} href="#" className={`${styles.social} ${isDark ? styles.socialDark : ""}`} aria-label={s.label}>
+              <a key={s.label} href={s.href} className={`${styles.social} ${isDark ? styles.socialDark : ""}`} aria-label={s.label} target="_blank" rel="noreferrer">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d={s.d}/>
@@ -152,10 +158,10 @@ export default function Footer(): React.ReactNode {
 
           {/* Contact info */}
           <div className={styles.contactList}>
-            {[
-              { icon:"📞", text:"+880 1700-000000" },
-              { icon:"✉️", text:"info@alfalahfoundation.org" },
-              { icon:"📍", text:"Dhaka, Bangladesh" },
+            {[ 
+              { icon:"📞", text:"+8801824129883" },
+              { icon:"✉️", text:"alfalahfoundation2019@gmail.com" },
+              { icon:"📍", text:"Joydepur, Gaziput" },
             ].map((c) => (
               <div key={c.text} className={`${styles.contactItem} ${isDark ? styles.contactItemDark : ""}`}>
                 <span>{c.icon}</span>

@@ -13,7 +13,7 @@ const ContactBar = () => {
           </div>
           <div className={styles.textContent}>
             <span className={styles.label}>Location:</span>
-            <p className={styles.value}>7 Green Lake Street Crawfordsville</p>
+            <p className={styles.value}>Joydepur, Gaziput</p>
           </div>
         </div>
 
@@ -26,7 +26,7 @@ const ContactBar = () => {
           </div>
           <div className={styles.textContent}>
             <span className={styles.label}>Email:</span>
-            <p className={styles.value}>Transfar@gmail.com</p>
+            <p className={styles.value}>alfalahfoundation2019@gmail.com</p>
           </div>
         </div>
 
@@ -39,7 +39,7 @@ const ContactBar = () => {
           </div>
           <div className={styles.textContent}>
             <span className={styles.label}>Phone:</span>
-            <p className={styles.value}>+00 468 (97) 234</p>
+            <p className={styles.value}>+8801824129883</p>
           </div>
         </div>
       </div>

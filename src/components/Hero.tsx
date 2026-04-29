@@ -65,47 +65,47 @@ const SECTORS: Sector[] = [
 const SLIDES: Slide[] = [
   {
     id: 1,
-    badge: "Education",
-    title: "Learning First",
-    description: "Every child deserves a fair start, and education is one of the strongest ways we help that happen.",
-    cta: "Explore Education",
-    href: "/programs",
+    badge: "July 2024",
+    title: "July Grafity - 2024",
+    description: "we make almost all the grafity from Chowrasta to BARI Gate. Our member work hard for this.",
+    cta: "View Story",
+    href: "/gallery",
     gradient: "linear-gradient(135deg, #0b1638 0%, #1a2d7c 60%, #243a96 100%)",
-    imageSrc: "/pexels-funmiphotography-a-29108795-6895226.jpg",
-    imageAlt: "Children receiving support in a community setting",
+    imageSrc: "/Gemini_Generated_Image_4tdb6s4tdb6s4tdb.png",
+    imageAlt: "Volunteers working on street graffiti for Al Falah Foundation",
   },
   {
     id: 2,
-    badge: "Healthcare",
-    title: "Care with Dignity",
-    description: "Health support becomes powerful when it reaches people where they are, with warmth and respect.",
-    cta: "Support Healthcare",
-    href: "/programs",
+    badge: "Flood Relief",
+    title: "giving the flooted people food and medicine.",
+    description: "We help in all calamities of our country.",
+    cta: "Support Relief",
+    href: "/donate",
     gradient: "linear-gradient(135deg, #061e36 0%, #0b3860 55%, #0d5080 100%)",
-    imageSrc: "/pexels-rdne-6646933.jpg",
-    imageAlt: "Volunteers assisting people at a community charity table",
+    imageSrc: "/Gemini_Generated_Image_37lojp37lojp37lo.png",
+    imageAlt: "Relief supplies prepared for flood-affected people",
   },
   {
     id: 3,
-    badge: "Food Security",
-    title: "Share the Meal",
-    description: "Food support is more than supplies. It is relief, dignity, and a little hope at the right moment.",
-    cta: "Feed a Family",
-    href: "/donate",
+    badge: "Blanket Drive",
+    title: "Giving Combol",
+    description: "make by you",
+    cta: "See More",
+    href: "/gallery",
     gradient: "linear-gradient(135deg, #251404 0%, #5c2e08 55%, #8a4510 100%)",
-    imageSrc: "/pexels-lagosfoodbank-9090750.jpg",
-    imageAlt: "Children receiving food packages at a community aid distribution",
+    imageSrc: "/Gemini_Generated_Image_8yq8178yq8178yq8.png",
+    imageAlt: "Blankets prepared for people in need",
   },
   {
     id: 4,
-    badge: "Community",
-    title: "Belonging for All",
-    description: "Community care connects people across generations, backgrounds, and shared responsibility.",
-    cta: "Join the Mission",
-    href: "/donate",
+    badge: "Our Team",
+    title: "The picture of our team.",
+    description: "The people behind our work, standing together for service and care.",
+    cta: "Meet Us",
+    href: "/#about",
     gradient: "linear-gradient(135deg, #061828 0%, #0a2e4a 55%, #0d4668 100%)",
-    imageSrc: "/pexels-tonywuphotography-12671875.jpg",
-    imageAlt: "A community support distribution with volunteers and families",
+    imageSrc: "/Gemini_Generated_Image_tu5kymtu5kymtu5k.png",
+    imageAlt: "Al Falah team members standing together with blankets",
   },
 ];
 
@@ -143,11 +143,12 @@ export default function HeroSection(): ReactElement {
   }, [animating]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = window.setInterval(() => {
       setCurrent((prev) => (prev + 1) % SLIDES.length);
     }, 5500);
-    return () => clearTimeout(timer);
-  }, [current]);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <section className={styles.hero}>

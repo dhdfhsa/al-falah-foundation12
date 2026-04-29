@@ -230,8 +230,8 @@ export default function DonatePage(): ReactElement {
     const tick = (now: number) => {
       const p = Math.min((now - t0) / dur, 1);
       const e = 1 - Math.pow(1 - p, 3);
-      setDonorCount(Math.round(e * 3847));
-      setTotalRaised(Math.round(e * 2894500));
+      setDonorCount(Math.round(e * 2000));
+      setTotalRaised(Math.round(e * 300000));
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -251,6 +251,16 @@ export default function DonatePage(): ReactElement {
 
   return (
     <main className={`${styles.page} ${isDark ? styles.pageDark : ""}`}>
+      <div className={styles.topNotice} role="note" aria-label="Donation page under construction notice">
+<span className={styles.topNoticeBadge}>Under Construction</span>
+        <span className={styles.topNoticeText}>Pay manually</span>
+        <span className={styles.topNoticeSep} aria-hidden="true">-</span>
+        <span className={styles.topNoticeText}>Bikas: 01918183698</span>
+        <span className={styles.topNoticeSep} aria-hidden="true">-</span>
+        <span className={styles.topNoticeText}>Nogod: 01824129883</span>
+        <span className={styles.topNoticeSep} aria-hidden="true">-</span>
+        <span className={styles.topNoticeText}>Upay: 01824129883</span>
+      </div>
       {/* ═══════════════════════════════════
            HERO SECTION
       ═══════════════════════════════════ */}
@@ -308,6 +318,27 @@ export default function DonatePage(): ReactElement {
                 <div className={styles.statBox}>
                   <span className={styles.statNumber}>100%</span>
                   <span className={styles.statLabel}>To Programs</span>
+                </div>
+              </div>
+
+              <div className={styles.noticeCard} role="note" aria-label="Donation page under construction notice">
+                <span className={styles.noticeBadge}>Under Construction</span>
+                <p className={styles.noticeText}>
+                  This donation page is under construction. For now, please send your donation to one of the following numbers:
+                </p>
+                <div className={styles.noticeList}>
+                  <div className={styles.noticeItem}>
+                    <strong>Bikas:</strong>
+                    <span>01918183698</span>
+                  </div>
+                  <div className={styles.noticeItem}>
+                    <strong>Nogod:</strong>
+                    <span>01824129883</span>
+                  </div>
+                  <div className={styles.noticeItem}>
+                    <strong>Upay:</strong>
+                    <span>01824129883</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -560,4 +591,9 @@ export default function DonatePage(): ReactElement {
     </main>
   );
 }
+
+
+
+
+
 

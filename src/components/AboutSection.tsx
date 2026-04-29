@@ -68,9 +68,9 @@ export default function AboutSection(): ReactElement {
     return () => obs.disconnect();
   }, [fired]);
 
-  const raised     = useCountUp(689540, 1000, statsActive);
-  const volunteers = useCountUp(38500,  1000, statsActive);
-  const families   = useCountUp(15000,  1000, statsActive);
+  const raised     = useCountUp(300000, 1000, statsActive);
+  const volunteers = useCountUp(150,  1000, statsActive);
+  const families   = useCountUp(2000,  1000, statsActive);
 
   return (
     <section className={styles.about} ref={sectionRef}>
@@ -94,7 +94,7 @@ export default function AboutSection(): ReactElement {
               <div className={styles.placeholder} style={{ background: "linear-gradient(145deg,#1a2d7c 0%,#2d4a9e 100%)" }}>
                 <PersonIcon />
               </div>
-              <Image src="/pexels-funmiphotography-a-29108795-6895226.jpg" alt="Al Falah volunteers helping children" className={styles.cardImg}
+              <Image src="/Gemini_Generated_Image_tu5kymtu5kymtu5k.png" alt="Al Falah volunteers helping children" className={styles.cardImg}
                 fill style={{ objectFit: 'cover' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             </div>
@@ -112,7 +112,7 @@ export default function AboutSection(): ReactElement {
               <div className={styles.placeholder} style={{ background: "linear-gradient(145deg,#0b1638 0%,#122060 100%)" }}>
                 <PersonIcon />
               </div>
-              <Image src="/pexels-lagosfoodbank-9090750.jpg" alt="Food aid distribution for children" className={styles.cardImg}
+              <Image src="/Gemini_Generated_Image_8yq8178yq8178yq8.png" alt="Food aid distribution for children" className={styles.cardImg}
                 fill style={{ objectFit: 'cover' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} id="about" />
             </div>
@@ -121,14 +121,14 @@ export default function AboutSection(): ReactElement {
               <div className={styles.placeholder} style={{ background: "linear-gradient(145deg,#243a96 0%,#3558c4 100%)" }}>
                 <PersonIcon />
               </div>
-              <Image src="/pexels-tonywuphotography-12671875.jpg" alt="Volunteers serving the community" className={styles.cardImg}
+              <Image src="/Gemini_Generated_Image_tu5kymtu5kymtu5k.png" alt="Volunteers serving the community" className={styles.cardImg}
                 fill style={{ objectFit: 'cover' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             </div>
 
             <div className={styles.floatBadge}>
               <span className={styles.badgeEst}>Est.</span>
-              <span className={styles.badgeYear}>2010</span>
+              <span className={styles.badgeYear}>2019</span>
               <span className={styles.badgeSub}>Serving Bangladesh</span>
             </div>
           </div>
@@ -140,8 +140,8 @@ export default function AboutSection(): ReactElement {
           <span className={styles.eyebrow}>About Us</span>
 
           <h2 className={styles.heading}>
-            Discover What<br />
-            Sets Us <em>Apart</em>
+            আর্তমানবতার সেবায়<br /> 
+             আমাদের<em>পথচলা</em>
           </h2>
 
           <svg
@@ -160,17 +160,15 @@ export default function AboutSection(): ReactElement {
           </svg>
 
           <p className={styles.desc}>
-            Al Falah Foundation stands apart through an unwavering commitment
-            to impact — creating real change, one heartfelt contribution at a
-            time. From education and healthcare to food aid and orphan care,
-            we serve the most vulnerable with dignity and compassion.
+           আর্তমানবতার সেবায় আমাদের পথচলা। সমাজের প্রতিটি মানুষের মুখে হাসি ফোটানোর যে পবিত্র দায়িত্ব আমরা নিয়েছি, তা সফল করতে আপনাদের স্বতঃস্ফূর্ত অংশগ্রহণ জরুরি।আপনাদের সাহায্য সহযোগিতা আমার অনুপ্রেরনার মূল উৎসহ।পরিচালনা কমিটির সততা,আর্দশ,আমানতদারিতা আমাদের মূলচালিকা শক্তি।আমরা বিশ্বাস করি, শিক্ষা, স্বাস্থ্যসেবা ও স্বনির্ভরতার মাধ্যমে আমরা একটি উন্নত সমাজ গড়তে পারি। আসুন, মানবতার পতাকাতলে দাঁড়িয়ে আমরা একযোগে কাজ করি, আগামীর স্বপ্ন জয় করি। আপনাদের সবাইকে ধন্যবাদ, জাযাকুল্লাহু খাইরান।"
+
           </p>
 
           <div className={styles.stats}>
             <StatRow
               gradient="linear-gradient(135deg, #c9912a, #e8b93f)"
               value={raised}
-              label="Raised by 63,000 people in one year"
+              label="Raised by 500 people in one year"
               icon={
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                   stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -228,3 +226,4 @@ function PersonIcon(): ReactElement {
     </svg>
   );
 }
+

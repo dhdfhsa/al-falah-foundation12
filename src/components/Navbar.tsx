@@ -226,16 +226,16 @@ export default function Navbar(): ReactElement {
       <div className={`${styles.topBar} ${isDark ? styles.topBarDark : ""}`}>
         <div className={styles.topBarInner}>
           <div className={styles.topBarLeft}>
-            <a href="tel:+8801700000000"
+            <a href="tel:+8801824129883" aria-label="Call us at +8801824129883"
               className={`${styles.tbItem} ${isDark ? styles.tbItemDark : ""}`}>
               <PhoneIcon />
-              +880 1700-000000
+              +8801824129883
             </a>
             <span className={styles.tbSep} />
-            <a href="mailto:info@alfalahfoundation.org"
+            <a href="mailto:alfalahfoundation2019@gmail.com"
               className={`${styles.tbItem} ${isDark ? styles.tbItemDark : ""}`}>
               <MailIcon />
-              info@alfalahfoundation.org
+              alfalahfoundation2019@gmail.com
             </a>
           </div>
           <p className={`${styles.tbTagline} ${isDark ? styles.tbTaglineDark : ""}`}>
@@ -248,7 +248,7 @@ export default function Navbar(): ReactElement {
         <div className={styles.mobileTopBar}>
           <Link href="/" className={styles.mobileBrand} aria-label="Al Falah Foundation home">
             <Image
-              src="/al-falah-logo.png"
+              src = "/Gemini_Generated_Image_4z1j5r4z1j5r4z.png"
               alt="Al Falah Foundation"
               width={44}
               height={44}
@@ -283,11 +283,11 @@ export default function Navbar(): ReactElement {
         </div>
 
         <div className={styles.mobileContactStrip}>
-          <a href="tel:+8801700000000" className={styles.mobileContactChip}>
+          <a href="tel:+8801824129883" className={styles.mobileContactChip}>
             <Phone size={14} />
             Call
           </a>
-          <a href="mailto:info@alfalahfoundation.org" className={styles.mobileContactChip}>
+          <a href="mailto:alfalahfoundation2019@gmail.com" className={styles.mobileContactChip}>
             <Mail size={14} />
             Email
           </a>
@@ -424,7 +424,7 @@ export default function Navbar(): ReactElement {
           <Link href="/" className={styles.logo} aria-label="Al Falah Foundation — Home">
             <div className={`${styles.logoCircle} ${isDark ? styles.logoCircleDark : ""}`}>
               <Image
-                src="/al-falah-logo.png"
+                src="/Gemini_Generated_Image_4z1j5r4z1j5r4z.png"
                 alt="Al Falah Foundation"
                 width={90}
                 height={90}

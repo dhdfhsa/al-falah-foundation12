@@ -31,6 +31,39 @@
   --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
   --glass: rgba(30, 41, 59, 0.7);
 }
+.topNotice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 14px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(201, 145, 42, 0.12));
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+  font-weight: 700;
+  text-align: center;
+}
+
+.topNoticeBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topNoticeText {
+  font-size: 0.98rem;
+}
+
+.topNoticeSep {
+  color: var(--text-muted);
+}
 
 /* ───────────────────────────────
    Hero Section
@@ -106,6 +139,68 @@
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   gap: 30px;
+}
+
+.noticeCard {
+  max-width: 760px;
+  margin: 22px auto 0;
+  padding: 22px 24px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+
+.pageDark .noticeCard {
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.noticeBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.noticeText {
+  margin: 14px 0 16px;
+  color: var(--text-main);
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 600;
+}
+
+.noticeList {
+  display: grid;
+  gap: 10px;
+}
+
+.noticeItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(37, 99, 235, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.pageDark .noticeItem {
+  background: rgba(59, 130, 246, 0.10);
+}
+
+.noticeItem strong {
+  color: var(--primary);
 }
 
 .statBox {
@@ -643,3 +738,5 @@
     font-size: 2.25rem;
   }
 }
+
+

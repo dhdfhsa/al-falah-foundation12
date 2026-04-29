@@ -17,34 +17,25 @@ interface Leader {
 const LEADERS: Leader[] = [
   {
     id: 1,
-    name: "Muhammad Habib",
-    title: "Founder & Executive Director",
-    mainMessage: "At Al Falah Foundation, we believe that <em>every life has value</em> and <em>every act of kindness creates ripples of change</em>. Our mission is simple: to serve the most vulnerable with unwavering compassion and dignity.",
-    subMessage: "Whether through education that opens doors, healthcare that saves lives, or food that nourishes hope—we are committed to transforming not just lives, but entire communities.",
-    image: "/levi-meir-clancy-3g3V1TWQi8k-unsplash.jpg", 
-    founded: "2010",
+    name: "Gazi Mohammad Abdulla Al Noman",
+    title: "Founder",
+    mainMessage: "আসসালামুআলকইকুম ২০১৯ সালে প্রতিষ্ঠিত আল-ফালাহ ফাউন্ডেশনে আপনাকে স্বাগতম। আমরা মূলত একটি অরাজনৈতিক মানবকল্যাণমূলক প্রতিষ্ঠান, যা সমাজের অবহেলিত, দুস্থ ও পিছিয়ে পড়া মানুষের মৌলিক চাহিদা পূরণে নিবেদিত। একটি সুন্দর, বৈষম্যহীন ও স্বনির্ভর সমাজ গড়ার স্বপ্ন নিয়ে আমাদের যাত্রা শুরু। ",
+    subMessage: "​আমরা সুবিধাবঞ্চিত শিশুদের শিক্ষা সামগ্রী কিনে দিই, দরিদ্র জনগোষ্ঠীকে স্বাস্থ্য সহায়তায় আর্থিক অনুদান দিই। বন্যা বা শীতের মতো দুর্যোগে বস্ত্র ও খাবার বিতরণ করি এবং ইফতারের ব্যবস্থা করার মাধ্যমে মানুষের পাশে দাঁড়াই। এছাড়াও, কর্মসংস্থানের চেষ্টা করা এবং ধর্মীয় দাওয়াতি কার্যক্রম পরিচালনা করাও আমাদের উদ্দেশ্য।​আমাদের জন্য দোয়া করবেন, যাতে আমরা আরো ভালো ভালো কাজগুলো করতে পারি। জাযাকাল্লাহু খাইরান ওয়া জাযাকিল্লাহু খাইরান।",
+    image: "/Gemini_Generated_Image_xt4komxt4komxt4k.png", 
+    founded: "2019",
     stat1: "1.5M+",
   },
   {
     id: 2,
-    name: "Zaid Al-Mansur", // Updated name to match the portrait
-    title: "Director of Programs",
-    mainMessage: "Our programs are <em>designed with purpose</em> and <em>executed with precision</em>. Every scholarship, every meal, every medical intervention is a step toward genuine, sustainable change in the lives of those we serve.",
-    subMessage: "We measure our success not in numbers, but in the smiles of children in classrooms, the hope in parents' eyes, and the health restored to our communities.",
-    image: "/luis-villasmil-hh3ViD0r0Rc-unsplash.jpg",
-    founded: "500+",
+    name: "Rayan Rouf Sahi", // Updated name to match the portrait
+    title: "Adviser",
+    mainMessage: "আল ফালাহ ফাউন্ডেশন  অসহায়ের পাশে দাড়ানো ও দারিদ্র্য বিমোচনের লক্ষ্য  নিয়ে তার যাত্রা শুরু করেছিল। আমি চেষ্টা করবো সবসময় আমার মেধা দিয়ে শ্রম দিয়ে জনগণের  সাহায্য করতে এবং আপনাদের সাহায্য কামনা করি।",
+    subMessage: "",
+    image: "/Gemini_Generated_Image_7hm9em7hm9em7hm9.png",
+    founded: "2019",
     stat1: "Programs",
   },
-  {
-    id: 3,
-    name: "Dr. Rahman Khan",
-    title: "Medical Director",
-    mainMessage: "Healthcare is a <em>fundamental right</em>, not a <em>luxury</em>. Through our mobile clinics and partnerships, we bring healing to remote villages where medical care once seemed impossible.",
-    subMessage: "Every patient we treat, every preventive measure we take, reinforces our commitment to building a healthier, more resilient Bangladesh for generations to come.",
-    image: "/mhrezaa-HZS-CkFEQds-unsplash.jpg",
-    founded: "50+",
-    stat1: "Villages",
-  },
+  
 ];
 
 export default function LeaderMessage(): ReactElement {

@@ -231,6 +231,10 @@
   letter-spacing: 0.07em;
   text-transform: uppercase;
   text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  appearance: none;
   border-radius: 6px;
   position: relative;
   transition: color 0.2s, background 0.2s;
@@ -267,6 +271,10 @@
 .mobileMenuHeader { display: none; }
 
 .menuBackdrop {
+  display: none;
+}
+
+.mobileShell {
   display: none;
 }
 
@@ -381,6 +389,14 @@
   color: #e8b93f;
   border-color: rgba(200,145,42,0.6);
   background: rgba(200,145,42,0.08);
+}
+
+.mobileHeaderLogin {
+  display: none;
+}
+
+.mobileHeaderLoginDark {
+  display: none;
 }
 
 /* ── Sign Up button ── */
@@ -540,6 +556,10 @@
   border-radius: 2px;
   transition: transform 0.3s, opacity 0.3s, background 0.4s;
 }
+.hamburger:hover {
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-1px);
+}
 .hamburgerDark span { background: rgba(200,145,42,0.85); }
 .hamburgerOpen span:nth-child(1) { transform: translateY(7px)  rotate(45deg);  }
 .hamburgerOpen span:nth-child(2) { opacity: 0; }
@@ -598,6 +618,282 @@
 }
 
 @media (max-width: 900px) {
+  .topBar,
+  .navInner,
+  .navLinks,
+  .navRight {
+    display: none;
+  }
+
+  .mobileShell {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    padding: 10px 12px 0;
+  }
+
+  .mobileShellDark {}
+
+  .mobileTopBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 12px;
+    border-radius: 22px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+      linear-gradient(160deg, #0f1b49 0%, #132567 55%, #0c1b47 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 14px 30px rgba(4, 9, 26, 0.28);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .mobileShellDark .mobileTopBar {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+      linear-gradient(160deg, #050910 0%, #071423 52%, #09162d 100%);
+    border-color: rgba(200,145,42,0.16);
+  }
+
+  .mobileBrand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .mobileBrand span {
+    font-family: 'Cinzel','Times New Roman',serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .mobileTopActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .mobileThemeBtn,
+  .mobileMenuBtn {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .mobileThemeBtn:hover,
+  .mobileMenuBtn:hover {
+    background: rgba(255,255,255,0.12);
+  }
+
+  .mobileMenuBtnDark {
+    color: rgba(200,145,42,0.92);
+    border-color: rgba(200,145,42,0.2);
+  }
+
+  .mobileContactStrip {
+    display: flex;
+    gap: 8px;
+    padding: 10px 2px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .mobileContactStrip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobileContactChip,
+  .mobileDonateChip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    font-family: 'DM Sans','Segoe UI',sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .mobileDonateChip {
+    background: linear-gradient(135deg, #c9912a, #e8b93f);
+    color: #0b1638;
+    border-color: transparent;
+  }
+
+  .mobileDrawer {
+    position: fixed;
+    top: 140px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 210;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 24px;
+    background:
+      radial-gradient(circle at top right, rgba(232,185,63,0.16), transparent 28%),
+      linear-gradient(180deg, rgba(8,15,34,0.98), rgba(12,20,46,0.98));
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 22px 44px rgba(2, 5, 12, 0.48);
+    transform: translateY(110%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.34s ease, opacity 0.2s ease;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .mobileDrawerDark {
+    background:
+      radial-gradient(circle at top right, rgba(200,145,42,0.16), transparent 28%),
+      linear-gradient(180deg, rgba(5,9,16,0.98), rgba(9,18,45,0.98));
+    border-color: rgba(200,145,42,0.14);
+  }
+
+  .mobileDrawerOpen {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobileDrawerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 2px 12px;
+    border-bottom: 1px dashed rgba(255,255,255,0.14);
+  }
+
+  .mobileDrawerHeader strong {
+    display: block;
+    color: #fff;
+    font-family: 'DM Sans','Segoe UI',sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .mobileDrawerHeader span {
+    display: block;
+    margin-top: 2px;
+    color: rgba(255,255,255,0.62);
+    font-size: 11px;
+  }
+
+  .mobileDrawerClose {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.9);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .mobileDrawerSection {
+    display: grid;
+    gap: 10px;
+  }
+
+  .mobileDrawerLabel {
+    color: rgba(255,255,255,0.62);
+    font-family: 'DM Sans','Segoe UI',sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 2px;
+  }
+
+  .mobileDrawerGrid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .mobileDrawerLink,
+  .mobileDrawerAction {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans','Segoe UI',sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .mobileDrawerLinkDark,
+  .mobileDrawerActionDark {
+    border-color: rgba(200,145,42,0.16);
+    background: rgba(200,145,42,0.06);
+  }
+
+  .mobileDrawerLink:hover,
+  .mobileDrawerAction:hover {
+    transform: translateX(2px);
+    background: rgba(255,255,255,0.1);
+  }
+
+  .mobileDrawerActionPrimary {
+    background: linear-gradient(135deg, #c9912a, #e8b93f);
+    color: #0b1638;
+    border-color: transparent;
+  }
+
+  .mobileDrawerActionPrimaryDark {
+    background: linear-gradient(135deg, #d8a63d, #f0c85d);
+    color: #0b1638;
+  }
+
+  .menuBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 180;
+    border: none;
+    background: rgba(3, 8, 24, 0.56);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+  }
+
   .hamburger { display: flex; }
   .userBadge,
   .logoutBtn {
@@ -640,14 +936,52 @@
     border-left: 1px solid rgba(255,255,255,0.08);
     box-shadow: -24px 0 50px rgba(3, 8, 24, 0.38);
   }
+
   .navLinksDark {
     background:
       linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
       linear-gradient(160deg, #040910 0%, #071423 48%, #09162d 100%);
     border-left-color: rgba(200,145,42,0.12);
   }
+
   .navLinksOpen {
     transform: translateX(0);
+  }
+
+  .mobileHeaderLogin {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.88);
+    font-family: 'DM Sans','Segoe UI',sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.2s;
+  }
+
+  .mobileHeaderLogin:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.3);
+    color: #fff;
+  }
+
+  .mobileHeaderLoginDark {
+    border-color: rgba(200,145,42,0.25);
+    background: rgba(200,145,42,0.08);
+    color: rgba(255,255,255,0.78);
+  }
+
+  .mobileHeaderLoginDark:hover {
+    border-color: rgba(200,145,42,0.52);
+    background: rgba(200,145,42,0.14);
+    color: #e8b93f;
   }
 
   .mobileMenuHeader {
@@ -764,6 +1098,8 @@
     border-radius: 14px;
     border: 1.5px solid rgba(255,255,255,0.16);
     background: rgba(255,255,255,0.06);
+    cursor: pointer;
+    appearance: none;
     transition: color 0.2s, background 0.2s, transform 0.2s, border-color 0.2s;
   }
   .mobileLogin:hover {
@@ -817,6 +1153,8 @@
   .topBarInner { padding: 6px 16px; }
   .donateBtn span { display: none; }
   .donateBtn { padding: 10px 14px; }
+  .mobileHeaderLogin span { display: none; }
+  .mobileHeaderLogin { padding: 8px 10px; }
 
   .navLinks {
     width: min(90vw, 360px);

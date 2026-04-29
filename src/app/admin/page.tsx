@@ -56,7 +56,7 @@ const TYPE_COLORS: Record<string, { bg: string; color: string }> = {
   urgent:  { bg: "rgba(224,85,85,.12)",   color: "#e05555" },
 };
 
-export default function AdminDashboard(): JSX.Element {
+export default function AdminDashboard(): ReactElement {
   const router  = useRouter();
 
   const [tab,       setTab]       = useState<Tab>("overview");

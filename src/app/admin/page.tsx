@@ -1,7 +1,7 @@
 // src/app/admin/page.tsx
 "use client";
 
-import { useState, useEffect, useCallback , JSX} from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
@@ -56,7 +56,7 @@ const TYPE_COLORS: Record<string, { bg: string; color: string }> = {
   urgent:  { bg: "rgba(224,85,85,.12)",   color: "#e05555" },
 };
 
-export default function AdminDashboard():JSX.Element {
+export default function AdminDashboard(): React.ReactElement {
   const router  = useRouter();
 
   const [tab,       setTab]       = useState<Tab>("overview");
@@ -235,8 +235,9 @@ export default function AdminDashboard():JSX.Element {
             ["overview",      "Overview",      <Ic.Grid  key="g"/>],
             ["members",       "Members",       <Ic.Users key="u"/>],
             ["notifications", "Notifications", <Ic.Bell  key="b"/>],
-            ["send",          "Send Notice",   <Ic.Send  key="s"/>],
-          ] as [Tab, string, JSX.Element][]).map(([t, label, icon]) => (
+["send",          "Send Notice",   <Ic.Send  key="s"/>]
+          ] as const;
+as [Tab, string, React.ReactNode][]
             <button
               key={t}
               onClick={() => setTab(t)}

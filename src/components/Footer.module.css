@@ -152,7 +152,9 @@
   flex-wrap: wrap;
 }
 .copy { font-size: 12.5px; color: rgba(255,255,255,.38); margin: 0; }
-.bottomLinks { display:flex;gap:20px; }
+.bottomLinks { display:flex;gap:20px; color: rgba(255, 255, 255, 0.38); }
+.developer{ font-size: 18.5px; color: #e8b93f; text-decoration:none; transition:color .2s; }
+.developer:hover { color: #c9912a; }
 .bottomLink { font-size: 12.5px; color: rgba(255,255,255,.38); text-decoration:none; transition:color .2s; }
 .bottomLink:hover { color: #e8b93f; }
 .bottomLinkDark { color:rgba(255,255,255,.28); }

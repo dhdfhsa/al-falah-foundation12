@@ -180,11 +180,13 @@ export default function Footer(): React.ReactNode {
             Built with ❤️ for humanity.
           </p>
           <div className={styles.bottomLinks}>
-            {["Terms","Privacy","Cookies"].map((l) => (
+            {/* {["Terms","Privacy","Cookies"].map((l) => (
               <Link key={l} href={`/${l.toLowerCase()}`} className={`${styles.bottomLink} ${isDark ? styles.bottomLinkDark : ""}`}>
                 {l}
               </Link>
-            ))}
+            ))} */}
+
+            developed  by <a className={styles.developer} target="_blank" href="https://safwan-pi.vercel.app/">Mohammad Safwan</a>
           </div>
           <div className={`${styles.heartBeat} ${isDark ? styles.heartBeatDark : ""}`}>
             ♥ Serving Humanity
@@ -194,3 +196,4 @@ export default function Footer(): React.ReactNode {
     </footer>
   );
 }
+

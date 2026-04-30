@@ -1,116 +1,283 @@
+/* src/components/ContactBar.module.css */
+
+/* ── Keyframes ── */
+@keyframes barSlideUp {
+  from { opacity: 0; transform: translateY(36px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+@keyframes itemFadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes particleFloat {
+  0%,100% { transform: translateY(0)     opacity(0.15); }
+  50%      { transform: translateY(-14px) opacity(0.35); }
+}
+@keyframes pulseRing {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  100% { transform: scale(1.9);  opacity: 0;   }
+}
+@keyframes glowPulse {
+  0%,100% { opacity: 0.45; transform: scale(1);    }
+  50%      { opacity: 0.65; transform: scale(1.06); }
+}
+
+/* ── Wrapper ── */
 .wrapper {
-  /* margin-top: 100px; */
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  /* If this sits on top of a footer, use: */
   position: relative;
-  margin-bottom: -50px; 
-  z-index: 10;
-
+  padding: 32px 0;
+  background: linear-gradient(180deg, #0a1428 0%, #0d1c3a 50%, #091224 100%);
+  overflow: hidden;
+  font-family: 'DM Sans','Segoe UI',sans-serif;
+}
+.wrapperDark {
+  background: linear-gradient(180deg, #050c1c 0%, #070f20 50%, #040a16 100%);
 }
 
-.container {
-  background-color: #0b1638; /* Dark background */
+/* Particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  background: #c9912a;
+  animation: particleFloat ease-in-out infinite;
+}
+
+/* Glow blobs */
+.glowLeft {
+  position: absolute;
+  left: -80px; top: 50%;
+  transform: translateY(-50%);
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,45,124,0.35) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 5s ease-in-out infinite;
+}
+.glowRight {
+  position: absolute;
+  right: -80px; top: 50%;
+  transform: translateY(-50%);
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,145,42,0.18) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 5s ease-in-out infinite;
+  animation-delay: -2.5s;
+}
+
+/* ── Bar ── */
+.bar {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 32px;
+  opacity: 0;
+  transform: translateY(36px) scale(0.98);
+}
+.barIn {
+  animation: barSlideUp 0.72s cubic-bezier(0.4,0,0.2,1) 0.05s forwards;
+}
+.barDark {}
+
+/* Top & bottom gold lines */
+.topLine {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #c9912a 30%, #e8b93f 50%, #c9912a 70%, transparent 100%);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  margin-bottom: 24px;
+}
+.topLineIn {
+  animation: lineGrow 0.9s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+}
+.bottomLine {
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(200,145,42,0.4) 30%, rgba(200,145,42,0.6) 50%, rgba(200,145,42,0.4) 70%, transparent 100%);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: right;
+  margin-top: 24px;
+}
+.bottomLineIn {
+  animation: lineGrow 0.9s cubic-bezier(0.4,0,0.2,1) 0.45s forwards;
+}
+
+/* ── Items row ── */
+.items {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  position: relative;
+}
+
+/* Dividers between items */
+.dividers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
   justify-content: space-around;
-  align-items: center;
-  padding: 35px 50px;
-  border-radius: 100px; /* High value for the pill shape */
-  color: #ffffff;
-  transform: translateY(80px);
+}
+.dividers span {
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(180deg, transparent, rgba(200,145,42,0.25) 40%, rgba(200,145,42,0.25) 60%, transparent);
+  border-radius: 1px;
+  display: block;
+}
+.dividersDark span {
+  background: linear-gradient(180deg, transparent, rgba(200,145,42,0.15) 40%, rgba(200,145,42,0.15) 60%, transparent);
 }
 
+/* ── Single item ── */
 .item {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 15px;
-  flex: 1;
+  gap: 18px;
+  padding: 16px 28px;
+  text-decoration: none;
+  border-radius: 16px;
+  position: relative;
+  cursor: pointer;
+  opacity: 0;
+  transition: background 0.28s, transform 0.25s;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.itemIn {
+  animation: itemFadeUp 0.6s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.item:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-3px);
+}
+.itemDark:hover {
+  background: rgba(200,145,42,0.05);
 }
 
-.iconBox {
-  color: #ffffff;
+/* Icon ring */
+.iconRing {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.28s, background 0.28s, box-shadow 0.28s;
+}
+.iconRingHovered {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
 }
 
-.textContent {
+/* Pulse ring */
+.pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--pulse-color, #c9912a);
+  opacity: 0;
+  pointer-events: none;
+}
+.pulseActive {
+  animation: pulseRing 1.4s ease-out infinite;
+}
+
+/* Icon */
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.75);
+  transition: color 0.25s, transform 0.25s;
+}
+.item:hover .iconWrap {
+  transform: scale(1.12);
+}
+
+/* Text */
+.text {
   display: flex;
   flex-direction: column;
+  gap: 3px;
+  min-width: 0;
 }
-
 .label {
+  font-size: 11px;
   font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 2px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  transition: color 0.25s;
+  white-space: nowrap;
 }
-
+.labelDark { color: rgba(255,255,255,0.38); }
 .value {
-  font-size: 0.9rem;
-  color: #b0b8c1; /* Soft gray for the subtext */
-  margin: 0;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.88);
+  transition: color 0.25s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.valueDark { color: rgba(255,255,255,0.72); }
+.item:hover .value { color: #fff; }
+
+/* Underline on hover */
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 28px;
+  right: 28px;
+  height: 1.5px;
+  border-radius: 2px;
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
-.divider {
-  width: 1px;
-  height: 40px;
-  background-color: #0f171e; /* Subtle vertical line */
-  margin: 0 20px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-  .container {
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .items {
     flex-direction: column;
-    border-radius: 30px;
-    gap: 30px;
-    padding: 40px;
+    align-items: stretch;
+    gap: 6px;
   }
-  
-  .divider {
-    display: none;
-  }
-  
+  .dividers { display: none; }
   .item {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
+    justify-content: flex-start;
+    padding: 14px 20px;
   }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 30px 20px;
-    gap: 20px;
-  }
-  
-  .item {
-    gap: 10px;
-  }
-  
-  .iconBox {
-    justify-content: center;
-  }
-  
-  .textContent {
-    align-items: center;
-  }
+  .item:hover { transform: translateX(4px); }
+  .value { font-size: 13.5px; }
+  .underline { left: 20px; right: 20px; }
+  .topLine,.bottomLine { margin: 0 0 14px; }
+  .bottomLine { margin: 14px 0 0; }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 20px 15px;
-    border-radius: 20px;
-  }
-  
-  .label {
-    font-size: 0.9rem;
-  }
-  
-  .value {
-    font-size: 0.8rem;
-  }
+  .wrapper { padding: 20px 0; }
+  .bar { padding: 0 16px; }
+  .iconRing { width: 44px; height: 44px; }
+  .value { font-size: 13px; }
+  .item { gap: 14px; padding: 12px 14px; }
 }

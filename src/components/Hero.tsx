@@ -89,7 +89,7 @@ const SLIDES: Slide[] = [
     id: 3,
     badge: "Blanket Drive",
     title: "Giving Combol",
-    description: "make by you",
+    description: "In the cold winter nights, we distribute warm blankets to those in need, providing comfort and warmth to vulnerable communities across Bangladesh.",
     cta: "See More",
     href: "/gallery",
     gradient: "linear-gradient(135deg, #251404 0%, #5c2e08 55%, #8a4510 100%)",

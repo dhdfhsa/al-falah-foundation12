@@ -103,7 +103,7 @@ export default function AboutSection(): ReactElement {
               <div className={styles.placeholder} style={{ background: "linear-gradient(145deg,#c9912a 0%,#e8b93f 100%)" }}>
                 <PersonIcon />
               </div>
-              <Image src="/pexels-rdne-6646933.jpg" alt="Community support and care" className={styles.cardImg}
+              <Image src="/Gemini_Generated_Image_37lojp37lojp37lo.png" alt="Community support and care" className={styles.cardImg}
                 fill style={{ objectFit: 'cover' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             </div>

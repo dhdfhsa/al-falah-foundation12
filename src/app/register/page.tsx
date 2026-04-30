@@ -310,7 +310,7 @@ export default function RegisterPage(): ReactElement {
             </div>
 
             {field("skills", "Skills", s1.skills, (v) => setS1({...s1, skills: v}), "text", "e.g. Teaching, First Aid, Cooking…")}
-            {field("address", "Address", s1.address, (v) => setS1({...s1, address: v}), "text", "Village / Road / District")}
+            {field("Permanent-address", "Permanent-address", s1.address, (v) => setS1({...s1, address: v}), "text", "Village / Road / District")}
 
             {/* Blood group */}
             <div className={styles.field}>

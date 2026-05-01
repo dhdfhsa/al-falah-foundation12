@@ -7,11 +7,11 @@ import styles from "./Footer.module.css";
 
 const PROGRAMS = ["Education Fund","Food Aid","Healthcare","Orphan Care","Clean Water","Community"];
 const LINKS    = [
-  { label:"About Us",    href:"/about"    },
-  { label:"Our Team",    href:"/team"     },
+  { label:"About Us",    href:"/#about"    },
+  { label:"Our Team",    href:"/#testimonials"     },
   { label:"Gallery",     href:"/gallery"  },
-  { label:"Impact",      href:"/impact"   },
-  { label:"Contact Us",  href:"/contact"  },
+  { label:"Impact",      href:"/donate#impact"   },
+  { label:"Contact Us",  href:"/#contact"  },
   { label:"Privacy Policy", href:"/privacy" },
 ];
 
@@ -112,7 +112,7 @@ export default function Footer(): React.ReactNode {
           <ul className={styles.colList}>
             {PROGRAMS.map((p) => (
               <li key={p}>
-                <Link href="/programs" className={`${styles.colLink} ${isDark ? styles.colLinkDark : ""}`}>
+                <Link href="/#programs" className={`${styles.colLink} ${isDark ? styles.colLinkDark : ""}`}>
                   <span className={styles.colArrow}>›</span> {p}
                 </Link>
               </li>

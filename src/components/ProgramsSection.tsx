@@ -323,7 +323,7 @@ export default function ProgramsSection(): ReactElement {
       {/* ── Bottom CTA ── */}
       <div className={`${styles.bottomCta} ${visible ? styles.bottomCtaIn : ""}`}>
         <Link
-          href="/programs"
+          href="/#programs"
           className={`${styles.viewAllBtn} ${isDark ? styles.viewAllBtnDark : ""}`}
         >
           View All Programs

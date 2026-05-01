@@ -115,6 +115,7 @@ export default function ContactBar(): React.ReactNode {
     <div
       className={`${styles.wrapper} ${isDark ? styles.wrapperDark : ""}`}
       ref={ref}
+      id="contact"
     >
       {/* ── Background particles ── */}
       <div className={styles.particles} aria-hidden="true">

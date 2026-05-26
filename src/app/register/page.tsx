@@ -10,6 +10,7 @@ import styles from "./page.module.css";
 interface StepOneData {
   fullName: string;
   profession: string;
+  position: string;
   className: string;
   phone: string;
   skills: string;
@@ -27,6 +28,19 @@ const BLOOD_GROUPS = ["A+", "A−", "B+", "B−", "AB+", "AB−", "O+", "O−"];
 const PROFESSIONS  = [
   "Student", "Teacher", "Doctor", "Engineer", "Lawyer",
   "Businessman", "Farmer", "Housewife", "NGO Worker", "Other",
+];
+const POSITIONS = [
+  "Chairman",
+  "Assistant Chairman",
+  "Manager",
+  "Chasier",
+  "Assistant Chasier",
+  "Managing Director",
+  "IT Director",
+  "Head Director",
+  "Director",
+  "Adviser",
+  "General Member",
 ];
 
 /* ── Password strength ── */
@@ -82,7 +96,7 @@ export default function RegisterPage(): ReactElement {
   const [theme,   setTheme]   = useState<"blue" | "dark">("blue");
 
   const [s1, setS1] = useState<StepOneData>({
-    fullName: "", profession: "", className: "",
+    fullName: "", profession: "", position: "", className: "",
     phone: "", skills: "", address: "", bloodGroup: "",
   });
   const [s2, setS2] = useState<StepTwoData>({
@@ -104,6 +118,7 @@ export default function RegisterPage(): ReactElement {
     const e: Record<string, string> = {};
     if (!s1.fullName.trim())    e.fullName    = "Full name is required";
     if (!s1.profession)         e.profession  = "Select your profession";
+    if (!s1.position)           e.position    = "Select your position";
     if (!s1.className.trim())   e.className   = "Class / Designation is required";
     if (!/^[0-9]{11}$/.test(s1.phone)) e.phone = "Enter a valid 11-digit number";
     if (!s1.skills.trim())      e.skills      = "List at least one skill";
@@ -290,6 +305,22 @@ export default function RegisterPage(): ReactElement {
                 </select>
                 {errors.profession && <span className={styles.err}>{errors.profession}</span>}
               </div>
+            </div>
+
+            <div className={styles.field}>
+              <label className={`${styles.label} ${isDark ? styles.labelDark : ""}`} htmlFor="position">
+                Position <span className={styles.req}>*</span>
+              </label>
+              <select
+                id="position"
+                value={s1.position}
+                onChange={(e) => setS1({...s1, position: e.target.value})}
+                className={`${styles.input} ${styles.select} ${isDark ? styles.inputDark : ""} ${errors.position ? styles.inputErr : ""}`}
+              >
+                <option value="">Select position</option>
+                {POSITIONS.map((position) => <option key={position} value={position}>{position}</option>)}
+              </select>
+              {errors.position && <span className={styles.err}>{errors.position}</span>}
             </div>
 
             <div className={styles.grid2}>

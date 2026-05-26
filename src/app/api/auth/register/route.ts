@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     await connectDB();
     const body = await req.json();
     const {
-      fullName, profession, className, phone,
+      fullName, profession, position, className, phone,
       skills, address, bloodGroup, email, password,
     } = body;
 
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
     const hashed = await bcrypt.hash(password, 12);
     const user = await User.create({
-      fullName, profession, className, phone,
+      fullName, profession, position, className, phone,
       skills, address, bloodGroup,
       email: email.toLowerCase(),
       password: hashed,

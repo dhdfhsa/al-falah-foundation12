@@ -5,6 +5,7 @@ export interface IUser extends Document {
   _id: mongoose.Types.ObjectId;
   fullName: string;
   profession: string;
+  position: string;
   className: string;
   phone: string;
   skills: string;
@@ -22,6 +23,7 @@ const UserSchema = new mongoose.Schema<IUser>(
   {
     fullName:   { type: String, required: true, trim: true },
     profession: { type: String, required: true },
+    position:   { type: String, required: true },
     className:  { type: String, required: true, trim: true },
     phone:      { type: String, required: true },
     skills:     { type: String, required: true },

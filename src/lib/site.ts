@@ -1,4 +1,4 @@
-export const SITE_NAME = "Al Falah Foundation";
+export const SITE_NAME = "al falah foundation";
 
 export const SITE_DESCRIPTION =
   "Al Falah Foundation is a Bangladesh-based charitable organization serving communities through education, food aid, healthcare, orphan care, clean water, and emergency relief.";
@@ -18,6 +18,10 @@ export const SITE_URL = normalizedSiteUrl.replace(/\/$/, "");
 
 export const SITE_KEYWORDS = [
   "Al Falah Foundation",
+  "Al Falah Foundation Gazipur",
+  "Al Falah Foundation gazipur",
+  "al falah foundation",
+  "al falah foundation gazipur",
   "Bangladesh charity",
   "Islamic charity",
   "education support",

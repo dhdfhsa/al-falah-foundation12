@@ -63,8 +63,19 @@ const SECTORS: Sector[] = [
 ];
 
 const SLIDES: Slide[] = [
-  {
+    {
     id: 1,
+    badge: "EID UL ADHA 2026",
+    title: "EID MUBARAK",
+    description: "On the joyous occasion of Eid ul-Adha, we distributed sacrificial meat to underprivileged families, ensuring that the spirit of giving and celebration reached those in need across Bangladesh.",
+    cta: "View Story",
+    href: "/gallery",
+    gradient: "linear-gradient(135deg, #0b1638 0%, #1a2d7c 60%, #243a96 100%)",
+    imageSrc: "/Gemini_Generated_Image_ys3lyhys3lyhys3l.png",
+    imageAlt: "Volunteers distributing sacrificial meat to underprivileged families during Eid ul-Adha",
+  },
+  {
+    id: 2,
     badge: "July 2024",
     title: "July Grafity - 2024",
     description: "we make almost all the grafity from Chowrasta to BARI Gate. Our member work hard for this.",
@@ -75,7 +86,7 @@ const SLIDES: Slide[] = [
     imageAlt: "Volunteers working on street graffiti for Al Falah Foundation",
   },
   {
-    id: 2,
+    id: 3,
     badge: "Flood Relief",
     title: "giving the flooted people food and medicine.",
     description: "We help in all calamities of our country.",
@@ -86,7 +97,7 @@ const SLIDES: Slide[] = [
     imageAlt: "Relief supplies prepared for flood-affected people",
   },
   {
-    id: 3,
+    id: 4,
     badge: "Blanket Drive",
     title: "Giving Combol",
     description: "In the cold winter nights, we distribute warm blankets to those in need, providing comfort and warmth to vulnerable communities across Bangladesh.",
@@ -97,7 +108,7 @@ const SLIDES: Slide[] = [
     imageAlt: "Blankets prepared for people in need",
   },
   {
-    id: 4,
+    id: 5,
     badge: "Our Team",
     title: "The picture of our team.",
     description: "The people behind our work, standing together for service and care.",
